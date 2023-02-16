@@ -1,0 +1,10 @@
+{
+  "home": {
+    "title": "Home 1",
+    "image": "assets/cabin.jpg",
+    "location": "new york",
+    "price_nightly": 125
+  },
+  "check_in": "01/01/2023",
+  "check_out": "01/05/2023"
+}
