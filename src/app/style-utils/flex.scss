@@ -1,0 +1,27 @@
+/* defined commonly used flex-type css classes */
+
+.flex {
+  display: flex;
+}
+
+.flex-row {
+  @extend .flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  @extend .flex;
+  flex-direction: column;
+}
+
+.flex-row-w-columns {
+  @extend .flex-row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flex-columns-w-row {
+  @extend .flex-column;
+  justify-content: space-between;
+  align-items: center;
+}

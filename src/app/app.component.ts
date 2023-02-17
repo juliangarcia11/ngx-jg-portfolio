@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Ngx JG Portfolio';
+  sideNavOpened: boolean = false;
+
+  /**
+   * Toggle the `sideNavOpened` parameter to the alternate boolean value
+   */
+  toggleSideNav(): void {
+    this.sideNavOpened = !this.sideNavOpened;
+    console.log('open side nav', {opened: this.sideNavOpened});
+  }
 }

@@ -8,13 +8,3 @@ $background-color: lightgrey;
 $background-color-dark: darkgray;
 $background-color-darker: grey;
 
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-row-w-columns {
-  @extend .flex-row;
-  justify-content: space-between;
-  align-items: center;
-}

@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, TestBed, tick} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 import {HomesComponent} from "./components/homes/homes.component";
@@ -12,18 +12,27 @@ import {query_for_el} from "./spec-utils";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
-describe('AppComponent', () => {
+fdescribe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule, HttpClientTestingModule, RouterOutlet, MatToolbarModule, MatButtonModule, MatIconModule
+        BrowserAnimationsModule,
+        RouterTestingModule,
+        HttpClientTestingModule,
+        RouterOutlet,
+        MatToolbarModule,
+        MatButtonModule,
+        MatIconModule,
+        MatSidenavModule
       ],
       declarations: [
-        AppComponent, HomesComponent, HeaderComponent
+        AppComponent
       ],
       providers: [
         {provide: DataService, useFactory: () => spyOnClass(DataService)},
@@ -56,5 +65,25 @@ describe('AppComponent', () => {
 
   it('should show a share button', () => {
     expect(query_for_el(fixture, '[data-test="share"]')).toBeTruthy();
+  });
+
+  it('should not show a side nav by default', () => {
+    const item = query_for_el(fixture, '[data-test="side-nav"]');
+    expect(item.style.visibility).toBe('hidden');
+  });
+
+  it('should show a side nav when menu button is clicked', () => {
+    // find the menu button
+    const menuButton = query_for_el(fixture, '[data-test="menu"]');
+
+    // click the button
+    menuButton.click();
+
+    // detect any changes
+    fixture.detectChanges();
+
+    // Assert side nav is now open
+    const item = query_for_el(fixture, '[data-test="side-nav"]');
+    expect(item).toHaveClass('mat-drawer-opened');
   });
 });

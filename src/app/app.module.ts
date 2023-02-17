@@ -18,6 +18,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatSidenavModule} from "@angular/material/sidenav";
 
 
 @NgModule({
@@ -33,22 +34,23 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     HeaderComponent,
     HomesComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        FormsModule,
-        MatButtonModule,
-        MatIconModule,
-        MatInputModule,
-        MatSnackBarModule,
-        MatFormFieldModule,
-        MatMomentDateModule,
-        MatDatepickerModule,
-        MatToolbarModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    FormsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatMomentDateModule,
+    MatDatepickerModule,
+    MatToolbarModule,
+    MatSidenavModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
