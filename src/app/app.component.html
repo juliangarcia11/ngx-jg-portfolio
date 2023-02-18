@@ -33,15 +33,15 @@
 <!-----------------------------Navigation---------------------------------->
 <!------------------------------------------------------------------------->
 <!------------------------------------------------------------------------->
-<mat-sidenav-container>
+<mat-sidenav-container [hasBackdrop]="false">
   <mat-sidenav [(opened)]="sideNavOpened"
                [mode]="'side'"
                [position]="'start'"
                class="flex-columns-w-row"
                data-test="side-nav">
-    <ul>
-      <li>Start</li>
-    </ul>
+    <mat-list role="list">
+      <mat-list-item data-test="side-nav-link" role="listitem">Item 1</mat-list-item>
+    </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>
     pretend content

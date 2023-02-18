@@ -1,21 +1,20 @@
-import {ComponentFixture, TestBed, tick} from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
-import {HomesComponent} from "./components/homes/homes.component";
-import {HeaderComponent} from "./components/header/header.component";
 import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {DataService} from "./services/data.service";
 import {spyOnClass} from "jasmine-es6-spies/dist";
 import {DialogService} from "./services/dialog.service";
 import {RouterOutlet} from "@angular/router";
-import {query_for_el} from "./spec-utils";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {click_item, query_for_all_el, query_for_el} from "./spec-utils";
+import {MatListModule} from "@angular/material/list";
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
 
@@ -29,7 +28,8 @@ fdescribe('AppComponent', () => {
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
-        MatSidenavModule
+        MatSidenavModule,
+        MatListModule
       ],
       declarations: [
         AppComponent
@@ -54,9 +54,8 @@ fdescribe('AppComponent', () => {
   });
 
   it('should show the assigned title', () => {
-    let titleItem = query_for_el(fixture, '[data-test="title"]');
-    expect(titleItem).toBeTruthy();
-    expect(titleItem.textContent).toContain(component.title);
+    expect(query_for_el(fixture, '[data-test="title"]')).toBeTruthy();
+    expect(query_for_el(fixture, '[data-test="title"]').textContent).toContain(component.title);
   });
 
   it('should show a menu button', () => {
@@ -68,22 +67,22 @@ fdescribe('AppComponent', () => {
   });
 
   it('should not show a side nav by default', () => {
-    const item = query_for_el(fixture, '[data-test="side-nav"]');
-    expect(item.style.visibility).toBe('hidden');
+    expect(query_for_el(fixture, '[data-test="side-nav"]').style.visibility).toBe('hidden');
   });
 
   it('should show a side nav when menu button is clicked', () => {
-    // find the menu button
-    const menuButton = query_for_el(fixture, '[data-test="menu"]');
-
-    // click the button
-    menuButton.click();
-
-    // detect any changes
-    fixture.detectChanges();
+    click_item(fixture, '[data-test="menu"]');
 
     // Assert side nav is now open
-    const item = query_for_el(fixture, '[data-test="side-nav"]');
-    expect(item).toHaveClass('mat-drawer-opened');
+    expect(query_for_el(fixture, '[data-test="side-nav"]')).toHaveClass('mat-drawer-opened');
   });
+
+  it('should have at least 1 link item in the side nav', () => {
+    expect(query_for_all_el(fixture, '[data-test="side-nav-link"]').length).toBeGreaterThanOrEqual(1);
+  });
+
+  // TODO:
+  //    - should change the route when a side nav item is clicked
+  //    - should open toast with current url after 'share' button is clicked
+
 });
