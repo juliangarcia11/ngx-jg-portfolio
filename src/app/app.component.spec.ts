@@ -5,7 +5,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {DataService} from "./services/data.service";
 import {spyOnClass} from "jasmine-es6-spies/dist";
 import {DialogService} from "./services/dialog.service";
-import {RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
@@ -13,6 +13,8 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {click_item, query_for_all_el, query_for_el} from "./spec-utils";
 import {MatListModule} from "@angular/material/list";
+import {Location} from '@angular/common';
+import {AppRoutes} from "./_routing/app-routes";
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -22,7 +24,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule.withRoutes(AppRoutes),
         HttpClientTestingModule,
         RouterOutlet,
         MatToolbarModule,
