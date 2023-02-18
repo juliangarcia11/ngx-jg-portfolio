@@ -79,8 +79,12 @@ describe('AppComponent', () => {
     expect(query_for_el(fixture, '[data-test="side-nav"]')).toHaveClass('mat-drawer-opened');
   });
 
-  it('should have at least 1 link item in the side nav', () => {
-    expect(query_for_all_el(fixture, '[data-test="side-nav-link"]').length).toBeGreaterThanOrEqual(1);
+  it('should have a "Home" link item in the side nav', () => {
+    expect(query_for_el(fixture, '[data-test="side-nav-link-home"]')).toBeTruthy();
+  });
+
+  it('should have 1 link item per route in the side nav', () => {
+    expect(query_for_all_el(fixture, '[data-test="side-nav-link"]').length).toBe(component.navigationRoutes.length);
   });
 
   // TODO:

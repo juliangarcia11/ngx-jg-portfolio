@@ -40,7 +40,13 @@
                class="flex-columns-w-row"
                data-test="side-nav">
     <mat-list role="list">
-      <mat-list-item data-test="side-nav-link" role="listitem">Item 1</mat-list-item>
+      <mat-list-item data-test="side-nav-link-home" role="listitem">Home</mat-list-item>
+      <mat-list-item *ngFor="let route of navigationRoutes; let i = index;"
+                     [id]="'side-nav-link-' + i"
+                     data-test="side-nav-link"
+                     role="listitem">
+        {{ route.title }}
+      </mat-list-item>
     </mat-list>
   </mat-sidenav>
   <mat-sidenav-content>
