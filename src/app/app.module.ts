@@ -21,6 +21,7 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatListModule} from "@angular/material/list";
     HeaderComponent,
     HomesComponent,
     BookingComponent,
-    WttrDisplayComponent
+    WttrDisplayComponent,
+    DashboardComponent
   ],
   exports: [
     AppRoutingModule,

@@ -39,18 +39,17 @@
                [position]="'start'"
                class="flex-columns-w-row"
                data-test="side-nav">
-    <mat-list role="list">
-      <mat-list-item data-test="side-nav-link-home" role="listitem">Home</mat-list-item>
-      <mat-list-item *ngFor="let route of navigationRoutes; let i = index;"
-                     [id]="'side-nav-link-' + i"
-                     data-test="side-nav-link"
-                     role="listitem">
-        {{ route.title }}
-      </mat-list-item>
-    </mat-list>
+    <mat-nav-list role="list" aria-label="Navigation side bar">
+      <a mat-list-item
+         *ngFor="let route of navigationRoutes; let i = index;"
+         [routerLink]="route.path"
+         [activated]="route.path === currentNavigationRoute"
+         routerLinkActive="active-nav-link"
+         [id]="'side-nav-link-' + i"
+         data-test="side-nav-link">{{ route.title }}</a>
+    </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    pretend content
     <!-----------------------------Route Content------------------------------->
     <router-outlet></router-outlet>
     <!------------------------------------------------------------------------->

@@ -44,9 +44,10 @@ describe('AppRoutingModule', () => {
     router.initialNavigation();
   });
 
-  it('should navigate to "/" by default', fakeAsync(() => {
+  it('should navigate to "/dashboard" by default', fakeAsync(() => {
+    router.navigate(['']);
     tick();
-    expect(location.path()).toBe('');
+    expect(location.path()).toBe('/dashboard');
   }));
 
   it('should navigate to "/wttr" when "wttr" route is navigated to', fakeAsync(() => {

@@ -1,4 +1,4 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
@@ -19,6 +19,7 @@ import {AppRoutes} from "./_routing/app-routes";
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+  let location: Location;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -42,6 +43,7 @@ describe('AppComponent', () => {
       ]
     }).compileComponents();
 
+    location = TestBed.get(Location);
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -79,16 +81,19 @@ describe('AppComponent', () => {
     expect(query_for_el(fixture, '[data-test="side-nav"]')).toHaveClass('mat-drawer-opened');
   });
 
-  it('should have a "Home" link item in the side nav', () => {
-    expect(query_for_el(fixture, '[data-test="side-nav-link-home"]')).toBeTruthy();
-  });
-
   it('should have 1 link item per route in the side nav', () => {
     expect(query_for_all_el(fixture, '[data-test="side-nav-link"]').length).toBe(component.navigationRoutes.length);
   });
 
-  // TODO:
-  //    - should change the route when a side nav item is clicked
-  //    - should open toast with current url after 'share' button is clicked
+  it('should navigate to "/dashboard" when the "Dashboard" side nav item is clicked', fakeAsync(() => {
+    // click the 1st nav link, the dashboard link
+    click_item(fixture, '#side-nav-link-0[data-test="side-nav-link"]');
+    // allow router to do its business
+    tick();
+    // check path
+    expect(location.path()).toBe('/dashboard');
+  }));
+
+  // TODO: should open toast with current url after 'share' button is clicked
 
 });

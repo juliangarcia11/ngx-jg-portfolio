@@ -1,3 +1,4 @@
+@import "src/styles";
 @import "src/app/style-utils/flex";
 
 .mat-toolbar-single-row.flex-row-w-columns {
@@ -16,4 +17,25 @@
   min-height: 100%;
   width: 100%;
   min-width: 100%;
+}
+
+::ng-deep .mat-drawer {
+  box-shadow: 5px 0px 5px $background-color;
+}
+
+::ng-deep .mat-mdc-nav-list {
+  padding-top: 0;
+}
+
+a ::ng-deep .mat-mdc-list-item-unscoped-content {
+  display: flex;
+  justify-content: center;
+}
+
+a.active-nav-link ::ng-deep .mdc-list-item__content {
+  border-bottom: solid 3px $some-deeppurple;
+}
+
+.mat-drawer-content.mat-sidenav-content {
+  padding: 5px 5px 5px 10px;
 }

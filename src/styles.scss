@@ -4,6 +4,7 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+$some-deeppurple: #673ab7; // TODO: figure out how to pull in colors from theme^
 $background-color: lightgrey;
 $background-color-dark: darkgray;
 $background-color-darker: grey;
