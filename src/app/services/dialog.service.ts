@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from "rxjs";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {ComponentType} from "@angular/cdk/overlay";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
+
+  private _dialog: MatDialogRef<unknown, any> | undefined;
 
   constructor(
     public dialog: MatDialog
@@ -18,9 +20,6 @@ export class DialogService {
    *     @Inject(MAT_DIALOG_DATA) public data: any
    */
   open(dialogComponent: ComponentType<unknown>, data: any): void {
-    const dialogRef = this.dialog.open(dialogComponent, data);
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    this._dialog = this.dialog.open(dialogComponent, data);
   }
 }
