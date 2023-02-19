@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, RouterEvent, Routes} from "@angular/router";
+import {Component} from '@angular/core';
+import {ActivatedRoute, NavigationEnd, Router, Routes} from "@angular/router";
 import {AppRoutes} from "./_routing/app-routes";
 import {filter} from "rxjs";
 
@@ -13,8 +13,10 @@ export class AppComponent {
   sideNavOpened: boolean = false;
   navigationRoutes: Routes;
   currentNavigationRoute: string = '/';
+  currentLocation: string = '/';
 
   constructor(private router: Router, private route: ActivatedRoute) {
+    this.currentLocation = router.url;
     // filter out default route catching and store the set of potential navigation routes to be displayed in the side nav
     this.navigationRoutes = AppRoutes.filter(route => !['**', ''].includes(route.path ?? ''));
 
@@ -22,6 +24,7 @@ export class AppComponent {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(event => {
         this.currentNavigationRoute = (event as NavigationEnd).url;
+        this.currentLocation = window.location.href;
       });
   }
 

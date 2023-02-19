@@ -15,11 +15,13 @@ import {click_item, query_for_all_el, query_for_el} from "./spec-utils";
 import {MatListModule} from "@angular/material/list";
 import {Location} from '@angular/common';
 import {AppRoutes} from "./_routing/app-routes";
-import {HeaderComponent} from "./components/header/header.component";
+import {HeaderComponent} from "./components";
+import {Clipboard, ClipboardModule} from "@angular/cdk/clipboard"
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
+  let clipboardService: jasmine.SpyObj<Clipboard>;
   let location: Location;
 
   beforeEach(async () => {
@@ -33,7 +35,8 @@ describe('AppComponent', () => {
         MatButtonModule,
         MatIconModule,
         MatSidenavModule,
-        MatListModule
+        MatListModule,
+        ClipboardModule
       ],
       declarations: [
         AppComponent, HeaderComponent
@@ -41,12 +44,19 @@ describe('AppComponent', () => {
       providers: [
         {provide: DataService, useFactory: () => spyOnClass(DataService)},
         {provide: DialogService, useFactory: () => spyOnClass(DialogService)},
+        {provide: Clipboard, useFactory: () => spyOnClass(Clipboard)},
       ]
     }).compileComponents();
 
     location = TestBed.get(Location);
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+  // before each test, get the clipboard service & set the title
+  beforeEach(() => {
+    clipboardService = TestBed.get(Clipboard);
+
     fixture.detectChanges();
   });
 
@@ -81,7 +91,4 @@ describe('AppComponent', () => {
     // check path
     expect(location.path()).toBe('/dashboard');
   }));
-
-  // TODO: should open toast with current url after 'share' button is clicked
-
 });

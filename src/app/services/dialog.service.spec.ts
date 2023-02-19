@@ -6,7 +6,7 @@ import {ComponentType} from "@angular/cdk/overlay";
 
 describe('DialogService', () => {
   let dialogService: DialogService;
-  let matDialogService: jasmine.SpyObj<MatDialog>;
+  let matDialogSpy: jasmine.SpyObj<MatDialog>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -16,7 +16,7 @@ describe('DialogService', () => {
       ]
     });
     dialogService = TestBed.inject(DialogService);
-    matDialogService = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
+    matDialogSpy = TestBed.inject(MatDialog) as jasmine.SpyObj<MatDialog>;
   });
 
   it('should be created', () => {
@@ -28,6 +28,6 @@ describe('DialogService', () => {
     dialogService.open({} as ComponentType<unknown>, {});
 
     // Assert that the dialog service was used to open a dialog
-    expect(matDialogService.open).toHaveBeenCalled();
+    expect(matDialogSpy.open).toHaveBeenCalled();
   });
 });

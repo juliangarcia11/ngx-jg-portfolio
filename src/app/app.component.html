@@ -3,8 +3,9 @@
 <!-------------------------Header Toolbar---------------------------------->
 <!------------------------------------------------------------------------->
 <!------------------------------------------------------------------------->
-<app-header #header [title]="title"
-            (openSideNav)="toggleSideNav()"
+<app-header [title]="title"
+            [currentUrl]="currentLocation"
+            (onClickMenu)="toggleSideNav()"
             data-test="header">
 </app-header>
 
