@@ -1,15 +1,4 @@
 @import "src/styles";
-@import "src/app/style-utils/flex";
-
-.mat-toolbar-single-row.flex-row-w-columns {
-  @extend .flex-row-w-columns;
-  align-items: center;
-}
-
-.mat-toolbar-single-row .column:first-of-type {
-  @extend .flex-row;
-  align-items: center;
-}
 
 .mat-sidenav-container {
   position: fixed;

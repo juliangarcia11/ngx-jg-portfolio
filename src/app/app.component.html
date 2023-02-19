@@ -1,32 +1,12 @@
 <!------------------------------------------------------------------------->
 <!------------------------------------------------------------------------->
-<!-----------------------------Toolbar------------------------------------->
+<!-------------------------Header Toolbar---------------------------------->
 <!------------------------------------------------------------------------->
 <!------------------------------------------------------------------------->
-<mat-toolbar class="flex-row-w-columns"
-             color="primary"
-             data-test="toolbar">
-
-  <!----------------------------Left----------------------------->
-  <div class="column">
-    <button mat-icon-button
-            (click)="toggleSideNav()"
-            aria-label="menu button to open the navigation menu"
-            data-test="menu">
-      <mat-icon>menu</mat-icon>
-    </button>
-    <span data-test="title">{{ title }}</span>
-  </div>
-
-  <!----------------------------Right---------------------------->
-  <div class="column">
-    <button mat-icon-button
-            aria-label="share button to share the current url"
-            data-test="share">
-      <mat-icon>share</mat-icon>
-    </button>
-  </div>
-</mat-toolbar>
+<app-header #header [title]="title"
+            (openSideNav)="toggleSideNav()"
+            data-test="header">
+</app-header>
 
 <!------------------------------------------------------------------------->
 <!------------------------------------------------------------------------->

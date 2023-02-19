@@ -12,6 +12,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
+import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 describe('AppRoutingModule', () => {
   let location: Location;
@@ -20,6 +21,7 @@ describe('AppRoutingModule', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
       imports: [
         BrowserAnimationsModule,
         RouterTestingModule.withRoutes(AppRoutes),
@@ -32,8 +34,7 @@ describe('AppRoutingModule', () => {
         MatListModule
       ],
       declarations: [
-        AppComponent,
-        WttrDisplayComponent
+        AppComponent
       ]
     });
 

@@ -1,73 +1,24 @@
-<header>
+<mat-toolbar class="flex-row-w-columns"
+             color="primary"
+             data-test="toolbar">
 
-  <div class="header-row">
-
-    <!-- begin left side of the header -->
-    <div class="header-left">
-
-      <!-- begin logo div -->
-      <div data-test="logo">
-        <img
-          width="40"
-          alt="Angular Logo"
-          src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg=="
-        />
-      </div>
-
-      <!-- begin search div -->
-      <div data-test="search">
-        <input type="text" placeholder="search">
-      </div>
-    </div>
-
-
-    <!-- begin right side of the header -->
-    <div class="header-right">
-
-      <!-- begin menu div -->
-      <div class="header-menu" data-test="menu">
-
-        <!--begin menu buttons -->
-        <button>Become a Host</button>
-        <button>Help</button>
-        <button>Sign Up</button>
-        <button>Login</button>
-
-      </div>
-
-    </div>
-
+  <!----------------------------Left----------------------------->
+  <div class="column">
+    <button mat-icon-button
+            (click)="toggleSideNav()"
+            aria-label="menu button to open the navigation menu"
+            data-test="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span data-test="title">{{ title }}</span>
   </div>
 
-
-  <div class="header-row">
-
-    <div class="header-left">
-      <div data-test="home-type">
-        <button>Home Type</button>
-      </div>
-
-      <div data-test="dates">
-        <button>Dates</button>
-      </div>
-
-      <div data-test="guests">
-        <button>Guests</button>
-      </div>
-
-      <div data-test="price">
-        <button>Price</button>
-      </div>
-
-      <div data-test="rooms">
-        <button>Rooms</button>
-      </div>
-
-      <div data-test="amenities">
-        <button>Amenities</button>
-      </div>
-    </div>
+  <!----------------------------Right---------------------------->
+  <div class="column">
+    <button mat-icon-button
+            aria-label="share button to share the current url"
+            data-test="share">
+      <mat-icon>share</mat-icon>
+    </button>
   </div>
-
-
-</header>
+</mat-toolbar>

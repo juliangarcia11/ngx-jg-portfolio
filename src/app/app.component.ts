@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, RouterEvent, Routes} from "@angular/router";
 import {AppRoutes} from "./_routing/app-routes";
 import {filter} from "rxjs";
@@ -22,7 +22,6 @@ export class AppComponent {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(event => {
         this.currentNavigationRoute = (event as NavigationEnd).url;
-        console.log('nav ended:', event);
       });
   }
 

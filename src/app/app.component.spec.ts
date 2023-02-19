@@ -15,6 +15,7 @@ import {click_item, query_for_all_el, query_for_el} from "./spec-utils";
 import {MatListModule} from "@angular/material/list";
 import {Location} from '@angular/common';
 import {AppRoutes} from "./_routing/app-routes";
+import {HeaderComponent} from "./components/header/header.component";
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -35,7 +36,7 @@ describe('AppComponent', () => {
         MatListModule
       ],
       declarations: [
-        AppComponent
+        AppComponent, HeaderComponent
       ],
       providers: [
         {provide: DataService, useFactory: () => spyOnClass(DataService)},
@@ -53,21 +54,8 @@ describe('AppComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show a toolbar', () => {
-    expect(query_for_el(fixture, '[data-test="toolbar"]')).toBeTruthy();
-  });
-
-  it('should show the assigned title', () => {
-    expect(query_for_el(fixture, '[data-test="title"]')).toBeTruthy();
-    expect(query_for_el(fixture, '[data-test="title"]').textContent).toContain(component.title);
-  });
-
-  it('should show a menu button', () => {
-    expect(query_for_el(fixture, '[data-test="menu"]')).toBeTruthy();
-  });
-
-  it('should show a share button', () => {
-    expect(query_for_el(fixture, '[data-test="share"]')).toBeTruthy();
+  it('should show a header', () => {
+    expect(query_for_el(fixture, '[data-test="header"]')).toBeTruthy();
   });
 
   it('should not show a side nav by default', () => {
