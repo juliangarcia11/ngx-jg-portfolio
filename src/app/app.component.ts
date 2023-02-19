@@ -13,10 +13,9 @@ export class AppComponent {
   sideNavOpened: boolean = false;
   navigationRoutes: Routes;
   currentNavigationRoute: string = '/';
-  currentLocation: string = '/';
+  currentLocation: string = '';
 
   constructor(private router: Router, private route: ActivatedRoute) {
-    this.currentLocation = router.url;
     // filter out default route catching and store the set of potential navigation routes to be displayed in the side nav
     this.navigationRoutes = AppRoutes.filter(route => !['**', ''].includes(route.path ?? ''));
 

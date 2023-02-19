@@ -13,7 +13,7 @@ import { WttrDisplayComponent } from './components/wttr-display/wttr-display.com
 import {FormsModule} from "@angular/forms";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDatepickerModule} from '@angular/material/datepicker';
@@ -57,7 +57,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatSidenavModule,
     MatListModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500}}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

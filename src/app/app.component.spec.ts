@@ -17,6 +17,7 @@ import {Location} from '@angular/common';
 import {AppRoutes} from "./_routing/app-routes";
 import {HeaderComponent} from "./components";
 import {Clipboard, ClipboardModule} from "@angular/cdk/clipboard"
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -36,7 +37,8 @@ describe('AppComponent', () => {
         MatIconModule,
         MatSidenavModule,
         MatListModule,
-        ClipboardModule
+        ClipboardModule,
+        MatSnackBarModule
       ],
       declarations: [
         AppComponent, HeaderComponent

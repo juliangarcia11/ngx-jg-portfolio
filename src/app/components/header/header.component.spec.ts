@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
@@ -8,12 +8,14 @@ import {click_item, query_for_el} from "../../spec-utils";
 import {Clipboard, ClipboardModule} from "@angular/cdk/clipboard"
 import {spyOnClass} from "jasmine-es6-spies/dist";
 import {Location} from "@angular/common";
+import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 describe('HeaderComponent', () => {
   let location: Location;
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
   let clipboardSpy: jasmine.SpyObj<Clipboard>;
+  let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
   let expectedTitle = 'Mocked Header Title';
   let expectedRoute = "mocked-route";
 
@@ -23,11 +25,13 @@ describe('HeaderComponent', () => {
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
-        ClipboardModule
+        ClipboardModule,
+        MatSnackBarModule
       ],
       declarations: [ HeaderComponent ],
       providers: [
-        {provide: Clipboard, useFactory: () => spyOnClass(Clipboard)}
+        {provide: Clipboard, useFactory: () => spyOnClass(Clipboard)},
+        {provide: MatSnackBar, useFactory: () => spyOnClass(MatSnackBar)},
       ]
     })
     .compileComponents();
@@ -41,6 +45,7 @@ describe('HeaderComponent', () => {
   // before each test, get the clipboard service & set the title
   beforeEach(() => {
     clipboardSpy = TestBed.inject(Clipboard) as jasmine.SpyObj<Clipboard>;
+    snackBarSpy = TestBed.inject(MatSnackBar) as jasmine.SpyObj<MatSnackBar>;
     component.title = expectedTitle;
     component.currentUrl = expectedRoute;
 
@@ -91,6 +96,11 @@ describe('HeaderComponent', () => {
     expect(component.currentUrl).toBe(expectedRoute);
   });
 
-  // TODO: should open toast with current url after 'share' button is clicked
+  it('should call snackBar.open on \'Share\' button click', () => {
+    // click the share button
+    click_item(fixture, '[data-test="share"]');
 
+    // assert that the clipboard service was called
+    expect(snackBarSpy.open).toHaveBeenCalled();
+  });
 });
