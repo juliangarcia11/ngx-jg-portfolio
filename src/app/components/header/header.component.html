@@ -6,11 +6,15 @@
   <div class="column">
     <button mat-icon-button
             (click)="handleMenuClick()"
+            matTooltip="Open navigation"
             aria-label="menu button to open the navigation menu"
             data-test="menu">
       <mat-icon>menu</mat-icon>
     </button>
-    <span data-test="title">{{ title }}</span>
+    <mat-icon data-test="header-icon">{{ model.icon }}</mat-icon>
+    <span data-test="title">
+      {{ model.title }}
+    </span>
   </div>
   <!------------------------Left End----------------------------->
 

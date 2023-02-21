@@ -9,6 +9,10 @@ import {Clipboard, ClipboardModule} from "@angular/cdk/clipboard"
 import {spyOnClass} from "jasmine-es6-spies/dist";
 import {Location} from "@angular/common";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {RouterTestingModule} from "@angular/router/testing";
+import {AppRoutes} from "../../_routing/app-routes";
+import {HeaderInterface} from "./header.interface";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 describe('HeaderComponent', () => {
   let location: Location;
@@ -16,17 +20,18 @@ describe('HeaderComponent', () => {
   let fixture: ComponentFixture<HeaderComponent>;
   let clipboardSpy: jasmine.SpyObj<Clipboard>;
   let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
-  let expectedTitle = 'Mocked Header Title';
-  let expectedRoute = "mocked-route";
+  let expectedHeader: HeaderInterface = { currentUrl: 'mocked-route', icon: 'home', title: 'Mocked Header Title' };
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule.withRoutes(AppRoutes),
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
         ClipboardModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatTooltipModule
       ],
       declarations: [ HeaderComponent ],
       providers: [
@@ -46,8 +51,7 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     clipboardSpy = TestBed.inject(Clipboard) as jasmine.SpyObj<Clipboard>;
     snackBarSpy = TestBed.inject(MatSnackBar) as jasmine.SpyObj<MatSnackBar>;
-    component.title = expectedTitle;
-    component.currentUrl = expectedRoute;
+    component.model = expectedHeader;
 
     fixture.detectChanges();
   });
@@ -56,17 +60,32 @@ describe('HeaderComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should have model', () => {
+    expect(component.model).toBe(expectedHeader);
+  });
+
   it('should show a toolbar', () => {
     expect(query_for_el(fixture, '[data-test="toolbar"]')).toBeTruthy();
   });
 
   it('should show the assigned title', () => {
     expect(query_for_el(fixture, '[data-test="title"]')).toBeTruthy();
-    expect(query_for_el(fixture, '[data-test="title"]').textContent).toContain(expectedTitle);
+    expect(query_for_el(fixture, '[data-test="title"]').textContent).toContain(expectedHeader.title);
+  });
+
+  it('should show the assigned icon', () => {
+    expect(query_for_el(fixture, '[data-test="header-icon"]')).toBeTruthy();
+    expect(query_for_el(fixture, '[data-test="header-icon"]').textContent).toContain(expectedHeader.icon);
   });
 
   it('should show a menu button', () => {
     expect(query_for_el(fixture, '[data-test="menu"]')).toBeTruthy();
+  });
+
+  // TODO Mat Test Harness
+  xit('should show a tooltip when menu button is hovered on', () => {
+
+    expect(query_for_el(fixture, '[data-test="menu-tooltip"]')).toBeTruthy()
   });
 
   it('should show a share button', () => {
@@ -93,7 +112,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should have an assigned currentRoute', () => {
-    expect(component.currentUrl).toBe(expectedRoute);
+    expect(component.model.currentUrl).toBe(expectedHeader.currentUrl);
   });
 
   it('should call snackBar.open on \'Share\' button click', () => {

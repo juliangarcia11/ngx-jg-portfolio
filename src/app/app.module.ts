@@ -1,16 +1,16 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from "@angular/common/http";
-import { MatDialogModule } from "@angular/material/dialog"
-
-import { AppRoutingModule } from './_routing/app-routing.module';
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
-import { HomesComponent } from './components/homes/homes.component';
-import { BookingComponent } from './components/booking/booking.component';
-import { WttrDisplayComponent } from './components/wttr-display/wttr-display.component';
+/**
+ * Angular Imports
+ */
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+
+/**
+ * Material Design Imports
+ */
+import {MatDialogModule} from "@angular/material/dialog"
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from "@angular/material/snack-bar";
@@ -21,8 +21,26 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
+/**
+ * Project Modules
+ */
+import {AppRoutingModule} from './_routing/app-routing.module';
+
+/**
+ * Application Components
+ */
+import {AppComponent} from './app.component';
+import {AboutMeComponent} from './components';
+import {ApodDisplayComponent} from './components';
+import {DashboardComponent} from './components';
+import {HeaderComponent} from './components';
+import {WttrDisplayComponent} from './components';
+
+// TODO: remove
+import {HomesComponent} from './components/homes/homes.component';
+import {BookingComponent} from './components/booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +49,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     HomesComponent,
     BookingComponent,
     WttrDisplayComponent,
-    DashboardComponent
+    DashboardComponent,
+    ApodDisplayComponent,
+    AboutMeComponent
   ],
   exports: [
     AppRoutingModule,
@@ -55,11 +75,13 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MatDatepickerModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatTooltipModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500}}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

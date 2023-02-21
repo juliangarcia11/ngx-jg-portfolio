@@ -1,6 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Clipboard} from "@angular/cdk/clipboard"
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ActivatedRoute, Router} from "@angular/router";
+import {HeaderInterface} from "./header.interface";
 
 /**
  * HeaderComponent utilizes MatToolbar to create a page header with:
@@ -17,10 +19,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 export class HeaderComponent {
 
   @Input()
-  title: string = '';
-
-  @Input()
-  currentUrl: string = '';
+  model: HeaderInterface = { title: '', icon: '', currentUrl: '' };
 
   @Output()
   onClickMenu = new EventEmitter<void>();
@@ -42,7 +41,7 @@ export class HeaderComponent {
    * copy the value of the `currentUrl` parameter & inform the user
    */
   handleShareClick(): void {
-    this.clipboard.copy(this.currentUrl);
-    this.snackBar.open(`Copied ${this.currentUrl} to clipboard!`, 'Ok!');
+    this.clipboard.copy(this.model.currentUrl);
+    this.snackBar.open(`Copied ${this.model.currentUrl} to clipboard!`, 'Ok!');
   }
 }

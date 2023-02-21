@@ -55,6 +55,7 @@ describe('AppComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
+
   // before each test, get the clipboard service & set the title
   beforeEach(() => {
     clipboardService = TestBed.get(Clipboard);
@@ -93,4 +94,20 @@ describe('AppComponent', () => {
     // check path
     expect(location.path()).toBe('/dashboard');
   }));
+
+  it('should have default app header title by default', () => {
+    expect(component.header.title).toBe(component.appTitle);
+  });
+
+  it('should have default app header icon by default', () => {
+    expect(component.header.icon).toBe(component.defaultIcon);
+  });
+
+  it('should have a header current url', () => {
+    expect(component.header.currentUrl).toBeDefined();
+  });
+
+  it('should have a currentNavigationRoute', () => {
+    expect(component.currentNavigationRoute).toBeTruthy();
+  });
 });
