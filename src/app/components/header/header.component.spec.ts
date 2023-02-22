@@ -13,11 +13,17 @@ import {RouterTestingModule} from "@angular/router/testing";
 import {AppRoutes} from "../../_routing/app-routes";
 import {HeaderInterface} from "./header.interface";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
+import {HarnessLoader} from "@angular/cdk/testing";
+import {MatTooltipHarness} from "@angular/material/tooltip/testing";
+import {MatSnackBarHarness} from "@angular/material/snack-bar/testing";
+import {MatButtonHarness} from "@angular/material/button/testing";
 
 describe('HeaderComponent', () => {
   let location: Location;
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
+  let loader: HarnessLoader;
   let clipboardSpy: jasmine.SpyObj<Clipboard>;
   let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
   let expectedHeader: HeaderInterface = { currentUrl: 'mocked-route', icon: 'home', title: 'Mocked Header Title' };
@@ -45,6 +51,7 @@ describe('HeaderComponent', () => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   // before each test, get the clipboard service & set the title
@@ -59,6 +66,39 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should load one tooltip harness', async () => {
+    const tooltips = await loader.getAllHarnesses(MatTooltipHarness);
+    expect(tooltips.length).toBe(1);
+  });
+
+  it('should be able to show the menu tooltip', async () => {
+    const tooltip = await loader.getHarness(MatTooltipHarness.with({selector: '[data-test="menu"]'}));
+    expect(await tooltip.isOpen()).toBe(false);
+    await tooltip.show();
+    expect(await tooltip.isOpen()).toBe(true);
+  });
+
+  it('should be able to hide the menu tooltip', async () => {
+    const tooltip = await loader.getHarness(MatTooltipHarness.with({selector: '[data-test="menu"]'}));
+    expect(await tooltip.isOpen()).toBe(false);
+    await tooltip.show();
+    expect(await tooltip.isOpen()).toBe(true);
+    await tooltip.hide();
+    expect(await tooltip.isOpen()).toBe(false);
+  });
+
+  it('should be able to get the text of the menu tooltip', async () => {
+    const tooltip = await loader.getHarness(MatTooltipHarness.with({selector: '[data-test="menu"]'}));
+    await tooltip.show();
+    expect(await tooltip.getTooltipText()).toBe('Open navigation');
+  });
+
+  it('should return empty when getting the menu tooltip text while closed', async () => {
+    const tooltip = await loader.getHarness(MatTooltipHarness.with({selector: '[data-test="menu"]'}));
+    expect(await tooltip.getTooltipText()).toBe('');
+  });
+
 
   it('should have model', () => {
     expect(component.model).toBe(expectedHeader);
@@ -80,12 +120,6 @@ describe('HeaderComponent', () => {
 
   it('should show a menu button', () => {
     expect(query_for_el(fixture, '[data-test="menu"]')).toBeTruthy();
-  });
-
-  // TODO Mat Test Harness
-  xit('should show a tooltip when menu button is hovered on', () => {
-
-    expect(query_for_el(fixture, '[data-test="menu-tooltip"]')).toBeTruthy()
   });
 
   it('should show a share button', () => {
