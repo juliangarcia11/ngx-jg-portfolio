@@ -51,11 +51,11 @@ describe('DataService', () => {
 
     // Verify that the service returned mocked data
     expect(dataServiceSpy).toHaveBeenCalledWith(null);
-    // todo
+    // NOTE: example code; to be removed
     // expect(dataServiceSpy).toHaveBeenCalledWith(MockedBooking);
 
     // Verify that the service called the proper HTTP endpoint
-    // todo
+    // NOTE: example code; to be removed
     // expect(httpClient.post).toHaveBeenCalledWith('mocky', 'assets/booking.json');
   });
 

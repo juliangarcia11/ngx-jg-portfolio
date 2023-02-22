@@ -38,7 +38,7 @@ import {DashboardComponent} from './components';
 import {HeaderComponent} from './components';
 import {WttrDisplayComponent} from './components';
 
-// TODO: remove
+// NOTE: example code; to be removed
 import {HomesComponent} from './components/homes/homes.component';
 import {BookingComponent} from './components/booking/booking.component';
 
