@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {WttrDisplayModel} from "./wttr-display.model";
+
 
 @Component({
   selector: 'app-wttr-display',
@@ -7,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class WttrDisplayComponent {
 
+  model: WttrDisplayModel = new WttrDisplayModel();
+
 }
+

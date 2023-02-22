@@ -99,7 +99,6 @@ describe('HeaderComponent', () => {
     expect(await tooltip.getTooltipText()).toBe('');
   });
 
-
   it('should have model', () => {
     expect(component.model).toBe(expectedHeader);
   });

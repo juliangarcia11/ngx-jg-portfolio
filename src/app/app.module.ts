@@ -57,7 +57,12 @@ import {BookingComponent} from './components/booking/booking.component';
     AppRoutingModule,
     AppComponent,
     HeaderComponent,
-    HomesComponent
+    HomesComponent,
+    BookingComponent,
+    WttrDisplayComponent,
+    DashboardComponent,
+    ApodDisplayComponent,
+    AboutMeComponent
   ],
   imports: [
     BrowserModule,
