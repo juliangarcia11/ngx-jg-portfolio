@@ -2,19 +2,32 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WttrDisplayComponent } from './wttr-display.component';
 import {query_for_el} from "../../spec-utils";
-import {Clipboard} from "@angular/cdk/clipboard";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {WttrDisplayModel} from "./wttr-display.model";
-import {FormsModule} from "@angular/forms";
+import {WttrModel} from "./wttr.model";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatInputModule} from "@angular/material/input";
+import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
+import {HarnessLoader} from "@angular/cdk/testing";
+import {MatCardModule} from "@angular/material/card";
+import {MatCardHarness} from "@angular/material/card/testing";
+import {MatFormFieldHarness} from "@angular/material/form-field/testing";
+import {MatInputHarness} from "@angular/material/input/testing";
 
 describe('WttrDisplayComponent', () => {
   let component: WttrDisplayComponent;
+  let loader: HarnessLoader;
   let fixture: ComponentFixture<WttrDisplayComponent>;
-  let expectedModel = new WttrDisplayModel();
+  let expectedModel = new WttrModel();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
         FormsModule
       ],
       declarations: [ WttrDisplayComponent ]
@@ -24,6 +37,7 @@ describe('WttrDisplayComponent', () => {
     fixture = TestBed.createComponent(WttrDisplayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   // before each test, set the model
@@ -38,38 +52,46 @@ describe('WttrDisplayComponent', () => {
   });
 
   it('should show a search input', () => {
-    expect(getSearchInput()).toBeTruthy();
+    expect(query_for_el(fixture, 'input[data-test="wttr-search-input"]')).toBeTruthy();
   });
 
   it('should have model', () => {
     expect(component.model).toBe(expectedModel);
   });
 
-  it('should update the model when search input is edited', () => {
-    // update the text field
-    addPDXToSearchInput();
-    // assert the model's search value has been updated
-    expect(component.model.search).toBe('PDX');
+  it('should find card with text', async () => {
+    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card"]'}));
+    expect(cards.length).toBe(1);
+    expect(await cards[0].getTitleText()).toBe(component.title);
   });
 
-  /**
-   * helper function
-   *
-   * Gets the 'search' <input> item
-   */
-  const getSearchInput = () => query_for_el(fixture, 'input[data-test="wttr-search-input"]');
+  it('should find search form field', async () => {
+    const formFields = await loader.getAllHarnesses(MatFormFieldHarness);
+    expect(formFields.length).toBe(1);
+  });
 
-  /**
-   * helper function
-   *
-   * Sets a 'search' value of "PDX" and detects fixture changes
-   */
-  const addPDXToSearchInput = () => {
-    // get search field
-    const searchInput: HTMLInputElement = getSearchInput();
+  it('should be able to get control of search form field', async () => {
+    const formField = await loader.getHarness(MatFormFieldHarness);
+    expect((await formField.getControl()) instanceof MatInputHarness).toBe(true);
+  });
 
-    // user enters search value of "PDX"
-    searchInput.value = 'PDX';
-    searchInput.dispatchEvent(new Event('input'));
-  }
+  it('should be able to check if search form field is invalid', async () => {
+    const formField = await loader.getHarness(MatFormFieldHarness);
+    component.searchControl.setValue('');
+    expect(await formField.isControlValid()).toBe(false);
+  });
+
+  it('should be able to update the input with text', async () => {
+    // load harnesses
+    const input = await loader.getHarness(MatInputHarness);
+    const formField = await loader.getHarness(MatFormFieldHarness);
+
+    // set input value
+    await input.setValue('PDX');
+
+    // assert the input value
+    expect(await input.getValue()).toBe('PDX');
+    // assert the form field is now to be true
+    expect(await formField.isControlValid()).toBe(true);
+  });
 });

@@ -5,7 +5,7 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 /**
  * Material Design Imports
@@ -41,6 +41,7 @@ import {WttrDisplayComponent} from './components';
 // NOTE: example code; to be removed
 import {HomesComponent} from './components/homes/homes.component';
 import {BookingComponent} from './components/booking/booking.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -81,7 +82,9 @@ import {BookingComponent} from './components/booking/booking.component';
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatCardModule,
+    ReactiveFormsModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500}}
