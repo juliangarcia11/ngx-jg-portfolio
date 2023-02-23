@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {WttrModel} from "./wttr.model";
-import {FormBuilder, FormControl, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -16,21 +16,32 @@ export class WttrDisplayComponent {
   private _subtitle: string = 'Powered by \'wttr.in\'';
   public get subtitle(): string { return this._subtitle; }
 
+  public loading: boolean = false;
+
   model: WttrModel;
-  searchControl: FormControl;
+  searchForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
     this.model = new WttrModel();
-    this.searchControl = this.fb.control(
-      this.model.search,[Validators.required, Validators.minLength(1)]);
+    this.searchForm = this.fb.group({
+      search: this.fb.control({ value: this.model.search, disabled: this.loading }, [Validators.required, Validators.minLength(1)])
+    });
   }
 
-  getErrorMessage(): string {
-    if (this.searchControl.hasError('required')) {
+  getErrorMessage(controlName: string): string {
+    if (this.searchForm.get(controlName)?.hasError('required')) {
       return 'You must enter a value';
     }
 
     return 'Unknown Error :(';
+  }
+
+  submitSearch() {
+    this.model = new WttrModel(this.searchForm.value);
+    // console.log('pretend submission', {
+    //   form: this.searchForm,
+    //   model: this.model
+    // })
   }
 }
 

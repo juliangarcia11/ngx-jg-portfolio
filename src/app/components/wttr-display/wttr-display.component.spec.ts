@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WttrDisplayComponent } from './wttr-display.component';
-import {query_for_el} from "../../spec-utils";
+import {click_item, query_for_el} from "../../spec-utils";
 import {WttrModel} from "./wttr.model";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -13,6 +13,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatCardHarness} from "@angular/material/card/testing";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 import {MatInputHarness} from "@angular/material/input/testing";
+import {MatIconModule} from "@angular/material/icon";
 
 describe('WttrDisplayComponent', () => {
   let component: WttrDisplayComponent;
@@ -26,6 +27,7 @@ describe('WttrDisplayComponent', () => {
         MatCardModule,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         FormsModule
@@ -55,6 +57,14 @@ describe('WttrDisplayComponent', () => {
     expect(query_for_el(fixture, 'input[data-test="wttr-search-input"]')).toBeTruthy();
   });
 
+  it('should show a search button', () => {
+    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]')).toBeTruthy();
+  });
+
+  it('should show a DISABLED search button by default', () => {
+    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]').disabled).toBeTruthy();
+  });
+
   it('should have model', () => {
     expect(component.model).toBe(expectedModel);
   });
@@ -77,7 +87,7 @@ describe('WttrDisplayComponent', () => {
 
   it('should be able to check if search form field is invalid', async () => {
     const formField = await loader.getHarness(MatFormFieldHarness);
-    component.searchControl.setValue('');
+    component.searchForm.get('search')?.setValue('');
     expect(await formField.isControlValid()).toBe(false);
   });
 
@@ -89,9 +99,49 @@ describe('WttrDisplayComponent', () => {
     // set input value
     await input.setValue('PDX');
 
-    // assert the input value
+    // assert the input value is PDX
     expect(await input.getValue()).toBe('PDX');
-    // assert the form field is now to be true
+    // assert the form field is now valid
     expect(await formField.isControlValid()).toBe(true);
+  });
+
+  it('should be able to disable formField', async () => {
+    const formField = await loader.getHarness(MatFormFieldHarness);
+    component.searchForm.get('search')?.disable();
+    expect(await formField.isDisabled()).toBe(true);
+  });
+
+  it('should show an ENABLED search button when the input has a value', async () => {
+    // load harnesses
+    const input = await loader.getHarness(MatInputHarness);
+    const formField = await loader.getHarness(MatFormFieldHarness);
+
+    // set input value
+    await input.setValue('PDX');
+
+    // assert the search button is not disabled (is enabled)
+    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]').disabled).toBeFalse();
+    // assert the form field is now valid
+    expect(await formField.isControlValid()).toBe(true);
+  });
+
+  it('should submit the search form when the search button is clicked', async () => {
+    // load harnesses
+    const input = await loader.getHarness(MatInputHarness);
+    const formField = await loader.getHarness(MatFormFieldHarness);
+    // set up a spy to listen for form submit emissions
+    spyOn(component, 'submitSearch');
+
+    // set input value
+    await input.setValue('PDX');
+
+    // assert the search button is not disabled (is enabled)
+    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]').disabled).toBeFalse();
+    // assert the form field is now valid
+    expect(await formField.isControlValid()).toBe(true);
+    // submit the form by clicking the button
+    click_item(fixture, 'button[data-test="wttr-search-button"]');
+    // assert the submitSearch emission occurred
+    expect(component.submitSearch).toHaveBeenCalled();
   });
 });
