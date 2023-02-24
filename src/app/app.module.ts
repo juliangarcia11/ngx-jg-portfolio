@@ -49,7 +49,7 @@ import {MatCardModule} from "@angular/material/card";
     HeaderComponent,
     HomesComponent,
     BookingComponent,
-    WttrDisplayComponent,
+    // WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,
     AboutMeComponent
@@ -60,7 +60,7 @@ import {MatCardModule} from "@angular/material/card";
     HeaderComponent,
     HomesComponent,
     BookingComponent,
-    WttrDisplayComponent,
+    // WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,
     AboutMeComponent

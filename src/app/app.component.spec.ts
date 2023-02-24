@@ -14,10 +14,10 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {click_item, query_for_all_el, query_for_el} from "./spec-utils";
 import {MatListModule} from "@angular/material/list";
 import {Location} from '@angular/common';
-import {AppRoutes} from "./_routing/app-routes";
 import {HeaderComponent} from "./components";
 import {Clipboard, ClipboardModule} from "@angular/cdk/clipboard"
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {AppRoutes} from "./_routing/app-routing.module";
 
 describe('AppComponent', () => {
   let component: AppComponent;

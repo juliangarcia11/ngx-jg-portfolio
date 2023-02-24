@@ -2,7 +2,6 @@ import {fakeAsync, TestBed, tick} from "@angular/core/testing";
 import {Location} from '@angular/common';
 import {AppComponent} from "../app.component";
 import {Router, RouterOutlet} from "@angular/router";
-import {AppRoutes} from "./app-routes";
 import {RouterTestingModule} from "@angular/router/testing";
 import {WttrDisplayComponent} from "../components";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -13,6 +12,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
+import {AppRoutes} from "./app-routing.module";
 
 describe('AppRoutingModule', () => {
   let location: Location;

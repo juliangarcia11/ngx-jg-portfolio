@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, Routes} from "@angular/router";
-import {AppRoutes, DashboardRoute} from "./_routing/app-routes";
 import {filter} from "rxjs";
 import {HeaderInterface} from "./components/header/header.interface";
+import {AppRoutes, DashboardRoute} from "./_routing/app-routing.module";
 
 @Component({
   selector: 'app-root',

@@ -10,7 +10,6 @@ import {spyOnClass} from "jasmine-es6-spies/dist";
 import {Location} from "@angular/common";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {RouterTestingModule} from "@angular/router/testing";
-import {AppRoutes} from "../../_routing/app-routes";
 import {HeaderInterface} from "./header.interface";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
@@ -18,6 +17,7 @@ import {HarnessLoader} from "@angular/cdk/testing";
 import {MatTooltipHarness} from "@angular/material/tooltip/testing";
 import {MatSnackBarHarness} from "@angular/material/snack-bar/testing";
 import {MatButtonHarness} from "@angular/material/button/testing";
+import {AppRoutes} from "../../_routing/app-routing.module";
 
 describe('HeaderComponent', () => {
   let location: Location;
