@@ -1,10 +1,17 @@
 :host {
   display: flex;
   justify-content: center;
+  flex-flow: column;
 }
 
-.wttr-card {
+.wttr-card.search{
   width: 45%;
+  margin: auto;
+}
+
+.wttr-card.results{
+  width: 85%;
+  margin: auto;
 }
 
 .wttr-card-header {

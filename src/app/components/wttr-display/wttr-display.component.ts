@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {WttrModel} from "./wttr.model";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {WttrService} from "./wttr.service";
 
 
 @Component({
@@ -17,11 +18,15 @@ export class WttrDisplayComponent {
   public get subtitle(): string { return this._subtitle; }
 
   public loading: boolean = false;
+  public searchFormExpanded = true;
 
   model: WttrModel;
   searchForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private weatherService: WttrService
+  ) {
     this.model = new WttrModel();
     this.searchForm = this.fb.group({
       search: this.fb.control({ value: this.model.search, disabled: this.loading }, [Validators.required, Validators.minLength(1)])
@@ -37,11 +42,13 @@ export class WttrDisplayComponent {
   }
 
   submitSearch() {
+    this.loading = true;
     this.model = new WttrModel(this.searchForm.value);
-    // console.log('pretend submission', {
-    //   form: this.searchForm,
-    //   model: this.model
-    // })
+    this.weatherService.getBase$(this.model.search).subscribe((resultingHtml) => {
+      this.model.result = resultingHtml;
+      this.loading = false;
+      this.searchFormExpanded = false;
+    })
   }
 }
 

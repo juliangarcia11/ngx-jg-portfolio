@@ -1,23 +1,11 @@
-<!--<input [(ngModel)]="model.search"-->
-<!--       data-test="wttr-search-input">-->
-
-<!-- data-test="wttr-card" -->
-
-<mat-card class="wttr-card" data-test="wttr-card">
+<mat-card *ngIf="searchFormExpanded" class="wttr-card search" data-test="wttr-card-search">
 
   <mat-card-header class="wttr-card-header">
-
-    <!--<div mat-card-avatar></div>-->
     <mat-card-title>{{ title }}</mat-card-title>
-
     <mat-card-subtitle class="wttr-card-subtitle">{{ subtitle }}</mat-card-subtitle>
-
   </mat-card-header>
 
-  <!--<div mat-card-image></div>-->
-
   <mat-card-content>
-
     <form (ngSubmit)="submitSearch()" class="wttr-search">
       <mat-form-field [formGroup]="searchForm" class="wttr-search-form-field" hintLabel="Max 50 characters" appearance="fill">
         <mat-label>city, state <b>or</b> zip code <b>or</b> airport code</mat-label>
@@ -48,11 +36,10 @@
     </form>
 
   </mat-card-content>
-
-  <!--<mat-card-actions>
-    <button mat-button>search</button>
-  </mat-card-actions>-->
-
 </mat-card>
 
-
+<ng-container *ngIf="model.result">
+  <mat-card class="wttr-card results" data-test="wttr-search-result">
+    <mat-card-content [innerHTML]="model.result"></mat-card-content>
+  </mat-card>
+</ng-container>

@@ -18,8 +18,8 @@ export class WttrService {
     private httpClient: HttpClient
   ) { }
 
-  getBase$(): Observable<any> {
-    return this.httpClient.get(this.apiBaseUrl)
+  getBase$(search: string): Observable<any> {
+    return this.httpClient.get(this.apiBaseUrl + search, { responseType: 'text' })
       .pipe(tap((results) => {
         //console.log('getting wttr', results);
       }));

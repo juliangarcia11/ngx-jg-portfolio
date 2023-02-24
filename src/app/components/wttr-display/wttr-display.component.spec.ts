@@ -14,6 +14,8 @@ import {MatCardHarness} from "@angular/material/card/testing";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 import {MatInputHarness} from "@angular/material/input/testing";
 import {MatIconModule} from "@angular/material/icon";
+import {spyOnClass} from "jasmine-es6-spies/dist";
+import {WttrService} from "./wttr.service";
 
 describe('WttrDisplayComponent', () => {
   let component: WttrDisplayComponent;
@@ -32,7 +34,10 @@ describe('WttrDisplayComponent', () => {
         BrowserAnimationsModule,
         FormsModule
       ],
-      declarations: [ WttrDisplayComponent ]
+      declarations: [ WttrDisplayComponent ],
+      providers: [
+        {provide: WttrService, useFactory: () => spyOnClass(WttrService)},
+      ]
     })
     .compileComponents();
 
@@ -45,7 +50,6 @@ describe('WttrDisplayComponent', () => {
   // before each test, set the model
   beforeEach(() => {
     component.model = expectedModel;
-
     fixture.detectChanges();
   });
 
@@ -69,10 +73,20 @@ describe('WttrDisplayComponent', () => {
     expect(component.model).toBe(expectedModel);
   });
 
-  it('should find card with text', async () => {
-    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card"]'}));
+  it('should find the search card', async () => {
+    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-search"]'}));
     expect(cards.length).toBe(1);
     expect(await cards[0].getTitleText()).toBe(component.title);
+  });
+
+  /**
+   * TODO: how can I update the fixture inside of an async function
+   */
+  xit('should NOT find the search card when result is defined on the model', async () => {
+    component.model.result = 'mocked inner html';
+    fixture.detectChanges();
+    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-search"]'}));
+    expect(cards.length).toBe(0);
   });
 
   it('should find search form field', async () => {
@@ -92,12 +106,8 @@ describe('WttrDisplayComponent', () => {
   });
 
   it('should be able to update the input with text', async () => {
-    // load harnesses
-    const input = await loader.getHarness(MatInputHarness);
-    const formField = await loader.getHarness(MatFormFieldHarness);
-
-    // set input value
-    await input.setValue('PDX');
+    const input = await setPDXasInput();
+    const formField = await assertSubmissionReady();
 
     // assert the input value is PDX
     expect(await input.getValue()).toBe('PDX');
@@ -112,36 +122,68 @@ describe('WttrDisplayComponent', () => {
   });
 
   it('should show an ENABLED search button when the input has a value', async () => {
-    // load harnesses
-    const input = await loader.getHarness(MatInputHarness);
-    const formField = await loader.getHarness(MatFormFieldHarness);
-
-    // set input value
-    await input.setValue('PDX');
-
-    // assert the search button is not disabled (is enabled)
-    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]').disabled).toBeFalse();
-    // assert the form field is now valid
-    expect(await formField.isControlValid()).toBe(true);
+    await setPDXasInput();
+    await assertSubmissionReady();
   });
 
   it('should submit the search form when the search button is clicked', async () => {
-    // load harnesses
-    const input = await loader.getHarness(MatInputHarness);
-    const formField = await loader.getHarness(MatFormFieldHarness);
-    // set up a spy to listen for form submit emissions
+    await setPDXasInput();
+    await assertSubmissionReady();
+
+    // create spy to watch for a call to submitSearch
     spyOn(component, 'submitSearch');
-
-    // set input value
-    await input.setValue('PDX');
-
-    // assert the search button is not disabled (is enabled)
-    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]').disabled).toBeFalse();
-    // assert the form field is now valid
-    expect(await formField.isControlValid()).toBe(true);
     // submit the form by clicking the button
     click_item(fixture, 'button[data-test="wttr-search-button"]');
     // assert the submitSearch emission occurred
     expect(component.submitSearch).toHaveBeenCalled();
   });
+
+  it('should NOT find the results card', async () => {
+    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-results"]'}));
+    expect(cards.length).toBe(0);
+  });
+
+  /**
+   * TODO: how can I update the fixture inside of an async function
+   */
+  xit('should find the results card when result is defined on the model', async () => {
+    component.model.result = 'mocked inner html';
+    fixture.detectChanges();
+    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-results"]'}));
+    expect(cards.length).toBe(1);
+    // expect(await cards[0].getTitleText()).toBe(component.title);
+  });
+
+  /********************************************************
+   * Helper Functions
+   * *******************************************************/
+
+  /**
+   * Set the value of the search input to 'PDX'
+   * @returns Promise<MatInputHarness> The input harness associated to the search input
+   */
+  const setPDXasInput = async (): Promise<MatInputHarness> => {
+    // load harnesses
+    const input = await loader.getHarness(MatInputHarness);
+    // set input value
+    await input.setValue('PDX');
+
+    return input;
+  };
+
+  /**
+   * Set the input, verify the formField is valid, and the search button is enabled
+   * @returns Promise<MatFormFieldHarness> The form field harness associated to the search input
+   */
+  const assertSubmissionReady = async (): Promise<MatFormFieldHarness> => {
+    await setPDXasInput();
+    // load harness
+    const formField = await loader.getHarness(MatFormFieldHarness);
+    // assert the form field is now valid
+    expect(await formField.isControlValid()).toBe(true);
+    // assert the search button is not disabled (is enabled)
+    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]').disabled).toBeFalse();
+
+    return formField;
+  };
 });
