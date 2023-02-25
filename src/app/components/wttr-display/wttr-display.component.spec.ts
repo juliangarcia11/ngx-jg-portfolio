@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WttrDisplayComponent } from './wttr-display.component';
-import {click_item, query_for_el} from "../../../../spec-utils";
+import {click_item, query_for_el} from "../../spec-utils";
 import {WttrModel} from "./wttr.model";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
