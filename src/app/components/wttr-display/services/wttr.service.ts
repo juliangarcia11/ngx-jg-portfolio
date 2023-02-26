@@ -18,10 +18,14 @@ export class WttrService {
     private httpClient: HttpClient
   ) { }
 
-  getBase$(search: string): Observable<any> {
-    return this.httpClient.get(this.apiBaseUrl + search, { responseType: 'text' })
+  get$(search: string, responseType: string): Observable<any> {
+    let options: any = {responseType: responseType};
+    return this.httpClient.get(this.apiBaseUrl + search, options)
       .pipe(tap((results) => {
         //console.log('getting wttr', results);
       }));
   }
+
+  getText$ = (search: string): Observable<any> => this.get$(search, 'text');
+  getBlob$ = (search: string): Observable<any> => this.get$(search, 'blob');
 }

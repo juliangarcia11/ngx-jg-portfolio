@@ -13,7 +13,7 @@ import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 import {MatInputHarness} from "@angular/material/input/testing";
 import {MatIconModule} from "@angular/material/icon";
 import {spyOnClass} from "jasmine-es6-spies/dist";
-import {WttrService} from "./wttr.service";
+import {WttrService} from "./services/wttr.service";
 import { WttrDisplayModel } from './models/wttr-display.model';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 

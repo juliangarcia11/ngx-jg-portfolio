@@ -4,7 +4,7 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { WttrService } from './wttr.service';
+import { WttrService } from './services/wttr.service';
 import { WttrDisplayModel } from './models/wttr-display.model';
 import { SearchStates } from './models/search-states.enum';
 
@@ -42,7 +42,7 @@ export class WttrDisplayComponent {
   submitSearch() {
     this.model.search = this.searchForm.value.search;
     this.model.state = SearchStates.SEARCHING;
-    this.weatherService.getBase$(this.model.search).subscribe({
+    this.weatherService.getText$(this.model.search).subscribe({
       next: (resultingHtml) => {
         this.model.state = SearchStates.PARSING;
         this.model.result = resultingHtml;

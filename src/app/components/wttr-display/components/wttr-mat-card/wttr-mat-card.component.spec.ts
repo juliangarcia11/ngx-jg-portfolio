@@ -33,7 +33,7 @@ describe('WttrMatCardComponent', () => {
 
   // before each test, set the model
   beforeEach(() => {
-    component.model = mockedModel;
+    component.model = new WttrDisplayModel();
     fixture.detectChanges();
   });
 
