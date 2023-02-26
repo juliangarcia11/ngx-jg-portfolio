@@ -1,0 +1,16 @@
+
+<!-- Note: All Wttr Displays share a common mat-card & mat-card-header -->
+<!-- Note: Custom content can be projected -->
+<mat-card class="wttr-card"
+          [class]="model.cardCssClass"
+          data-test="wttr-card">
+
+    <mat-card-header class="wttr-card-header">
+        <mat-card-title>{{ model.cardTitle }}</mat-card-title>
+        <mat-card-subtitle class="wttr-card-subtitle">{{ model.subtitle }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <!-- Note: Projected content lands here :) -->
+    <ng-content></ng-content>
+
+</mat-card>

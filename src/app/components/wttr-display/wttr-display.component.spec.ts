@@ -2,7 +2,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { WttrDisplayComponent } from './wttr-display.component';
 import {click_item, query_for_el} from "../../spec-utils";
-import {WttrModel} from "./wttr.model";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
@@ -10,21 +9,23 @@ import {MatInputModule} from "@angular/material/input";
 import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
 import {HarnessLoader} from "@angular/cdk/testing";
 import {MatCardModule} from "@angular/material/card";
-import {MatCardHarness} from "@angular/material/card/testing";
 import {MatFormFieldHarness} from "@angular/material/form-field/testing";
 import {MatInputHarness} from "@angular/material/input/testing";
 import {MatIconModule} from "@angular/material/icon";
 import {spyOnClass} from "jasmine-es6-spies/dist";
 import {WttrService} from "./wttr.service";
+import { WttrDisplayModel } from './models/wttr-display.model';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('WttrDisplayComponent', () => {
   let component: WttrDisplayComponent;
   let loader: HarnessLoader;
   let fixture: ComponentFixture<WttrDisplayComponent>;
-  let expectedModel = new WttrModel();
+  let expectedModel = new WttrDisplayModel();
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [
         MatCardModule,
         MatFormFieldModule,
@@ -57,6 +58,10 @@ describe('WttrDisplayComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should show a wttr-mat-card', () => {
+    expect(query_for_el(fixture, '[data-test="wttr-mat-card"]')).toBeTruthy();
+  });
+
   it('should show a search input', () => {
     expect(query_for_el(fixture, 'input[data-test="wttr-search-input"]')).toBeTruthy();
   });
@@ -71,22 +76,6 @@ describe('WttrDisplayComponent', () => {
 
   it('should have model', () => {
     expect(component.model).toBe(expectedModel);
-  });
-
-  it('should find the search card', async () => {
-    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-search"]'}));
-    expect(cards.length).toBe(1);
-    expect(await cards[0].getTitleText()).toBe(component.title);
-  });
-
-  /**
-   * TODO: how can I update the fixture inside of an async function
-   */
-  xit('should NOT find the search card when result is defined on the model', async () => {
-    component.model.result = 'mocked inner html';
-    fixture.detectChanges();
-    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-search"]'}));
-    expect(cards.length).toBe(0);
   });
 
   it('should find search form field', async () => {
@@ -136,22 +125,6 @@ describe('WttrDisplayComponent', () => {
     click_item(fixture, 'button[data-test="wttr-search-button"]');
     // assert the submitSearch emission occurred
     expect(component.submitSearch).toHaveBeenCalled();
-  });
-
-  it('should NOT find the results card', async () => {
-    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-results"]'}));
-    expect(cards.length).toBe(0);
-  });
-
-  /**
-   * TODO: how can I update the fixture inside of an async function
-   */
-  xit('should find the results card when result is defined on the model', async () => {
-    component.model.result = 'mocked inner html';
-    fixture.detectChanges();
-    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card-results"]'}));
-    expect(cards.length).toBe(1);
-    // expect(await cards[0].getTitleText()).toBe(component.title);
   });
 
   /********************************************************

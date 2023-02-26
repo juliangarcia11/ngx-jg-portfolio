@@ -1,7 +1,12 @@
-import {Component} from '@angular/core';
-import {WttrModel} from "./wttr.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {WttrService} from "./wttr.service";
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import { WttrService } from './wttr.service';
+import { WttrDisplayModel } from './models/wttr-display.model';
+import { SearchStates } from './models/search-states.enum';
 
 
 @Component({
@@ -11,25 +16,18 @@ import {WttrService} from "./wttr.service";
 })
 export class WttrDisplayComponent {
 
-  private _title: string = 'Search for the weather';
-  public get title(): string { return this._title; }
-
-  private _subtitle: string = 'Powered by \'wttr.in\'';
-  public get subtitle(): string { return this._subtitle; }
-
-  public loading: boolean = false;
   public searchFormExpanded = true;
 
-  model: WttrModel;
+  model: WttrDisplayModel;
   searchForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private weatherService: WttrService
   ) {
-    this.model = new WttrModel();
+    this.model = new WttrDisplayModel();
     this.searchForm = this.fb.group({
-      search: this.fb.control({ value: this.model.search, disabled: this.loading }, [Validators.required, Validators.minLength(1)])
+      search: this.fb.control(this.model.search, [Validators.required, Validators.minLength(1)])
     });
   }
 
@@ -42,13 +40,22 @@ export class WttrDisplayComponent {
   }
 
   submitSearch() {
-    this.loading = true;
-    this.model = new WttrModel(this.searchForm.value);
-    this.weatherService.getBase$(this.model.search).subscribe((resultingHtml) => {
-      this.model.result = resultingHtml;
-      this.loading = false;
-      this.searchFormExpanded = false;
-    })
+    this.model.search = this.searchForm.value.search;
+    this.model.state = SearchStates.SEARCHING;
+    this.weatherService.getBase$(this.model.search).subscribe({
+      next: (resultingHtml) => {
+        this.model.state = SearchStates.PARSING;
+        this.model.result = resultingHtml;
+      },
+      error: (e) => {
+        console.error(e);
+        this.model.state = SearchStates.RESPONSE_ERROR;
+      },
+      complete: () => {
+        console.info('wttr search complete');
+        this.model.state = SearchStates.DONE;
+      }
+    });
   }
 }
 

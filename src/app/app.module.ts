@@ -42,6 +42,7 @@ import {WttrDisplayComponent} from './components';
 import {HomesComponent} from './components/homes/homes.component';
 import {BookingComponent} from './components/booking/booking.component';
 import {MatCardModule} from "@angular/material/card";
+import { WttrMatCardComponent } from './components/wttr-display/components/wttr-mat-card/wttr-mat-card.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import {MatCardModule} from "@angular/material/card";
     WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,
-    AboutMeComponent
+    AboutMeComponent,
+    WttrMatCardComponent
   ],
   exports: [
     AppRoutingModule,
