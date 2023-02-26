@@ -16,7 +16,7 @@ export class WttrDisplayModel {
   private _cardTitle: string = this.defaultTitle;
   public get cardTitle(): string { return this._cardTitle; }
 
-  private _cardCssClass: 'search' | 'results' | 'error' = 'search';
+  private _cardCssClass: 'search' | 'search loading' | 'results' | 'error' = 'search';
   public get cardCssClass(): string { return this._cardCssClass; }
 
   private _defaultTitle: string = 'Search for the weather';
@@ -51,7 +51,7 @@ export class WttrDisplayModel {
     switch (this.state) {
       case SearchStates.SEARCHING:
       case SearchStates.PARSING:
-        this._cardCssClass = 'search';
+        this._cardCssClass = 'search loading';
         break;
       case SearchStates.DONE:
         // update results title before setting it on the card
