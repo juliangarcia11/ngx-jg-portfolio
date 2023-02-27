@@ -27,7 +27,7 @@
     <!-- loading content -->
     <mat-card-content *ngIf="model.state == States.SEARCHING || model.state == States.PARSING"
                       data-test="wttr-card-loading">
-        <mat-progress-bar color="primary" mode="indeterminate"></mat-progress-bar>
+        <mat-spinner color="primary" mode="indeterminate"></mat-spinner>
     </mat-card-content>
 
     <!-- error content -->

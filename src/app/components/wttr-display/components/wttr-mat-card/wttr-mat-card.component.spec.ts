@@ -15,8 +15,8 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WttrDisplayModel } from '../../models/wttr-display.model';
 import { query_for_el } from '../../../../spec-utils';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressBarHarness } from '@angular/material/progress-bar/testing';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerHarness } from '@angular/material/progress-spinner/testing';
 
 describe('WttrMatCardComponent', () => {
   let component: WttrMatCardComponent;
@@ -28,7 +28,7 @@ describe('WttrMatCardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MatCardModule,
-        MatProgressBarModule,
+        MatProgressSpinnerModule,
         BrowserAnimationsModule,
       ],
       declarations: [ WttrMatCardComponent ]
@@ -72,18 +72,18 @@ describe('WttrMatCardComponent', () => {
     expect(await cards[0].getSubtitleText()).toBe(mockedModel.subtitle);
   });
 
-  it('should find the mat progress bar if the state is \'SEARCHING\'', async () => {
+  it('should find the mat spinner if the state is \'SEARCHING\'', async () => {
     component.model.state = component.States.SEARCHING;
     fixture.detectChanges();
-    const progressBar = await loader.getAllHarnesses(MatProgressBarHarness);
-    expect(progressBar.length).toBe(1);
+    const spinner = await loader.getAllHarnesses(MatProgressSpinnerHarness);
+    expect(spinner.length).toBe(1);
   });
 
-  it('should find the mat progress bar if the state is \'PARSING\'', async () => {
+  it('should find the mat spinner if the state is \'PARSING\'', async () => {
     component.model.state = component.States.PARSING;
     fixture.detectChanges();
-    const progressBar = await loader.getAllHarnesses(MatProgressBarHarness);
-    expect(progressBar.length).toBe(1);
+    const spinner = await loader.getAllHarnesses(MatProgressSpinnerHarness);
+    expect(spinner.length).toBe(1);
   });
 
   /***********************************************************

@@ -16,6 +16,12 @@
     width: 45%;
 }
 
+.wttr-card.loading mat-card-content {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
 .wttr-card.results {
 
     .wttr-card-header {
