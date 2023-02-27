@@ -2,9 +2,9 @@
 
     <!-- To be projected into our custom mat card -->
 
-    <!-- NOTE: Search Form -->
-    <mat-card-content *ngIf="model.result.length < 1">
-        <form (ngSubmit)="submitSearch()" class="wttr-search">
+    <!-- NOTE: Search Form to be projected into the app-wttr-mat-card -->
+    <ng-container searchForm>
+        <form  (ngSubmit)="submitSearch()" class="wttr-search">
             <mat-form-field [formGroup]="searchForm" class="wttr-search-form-field" hintLabel="Max 50 characters"
                             appearance="fill">
                 <mat-label>city, state <b>or</b> zip code <b>or</b> airport code</mat-label>
@@ -33,11 +33,9 @@
 
             </mat-form-field>
         </form>
-    </mat-card-content>
+    </ng-container>
 
-    <!-- NOTE: Search Results -->
-    <mat-card-content *ngIf="model.result.length"
-                      [innerHTML]="model.result">
-    </mat-card-content>
+    <!-- NOTE: Search Results to be projected into the app-wttr-mat-card -->
+    <div results [innerHTML]="model.result"></div>
 
 </app-wttr-mat-card>

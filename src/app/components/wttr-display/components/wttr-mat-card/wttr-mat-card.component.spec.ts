@@ -1,11 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
 import { WttrMatCardComponent } from './wttr-mat-card.component';
-import {MatCardHarness} from "@angular/material/card/testing";
-import {HarnessLoader} from "@angular/cdk/testing";
-import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
-import {MatCardModule} from "@angular/material/card";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {
+  MatCardHarness,
+  MatCardSection
+} from '@angular/material/card/testing';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WttrDisplayModel } from '../../models/wttr-display.model';
 import { query_for_el } from '../../../../spec-utils';
 
@@ -36,7 +42,6 @@ describe('WttrMatCardComponent', () => {
     component.model = new WttrDisplayModel();
     fixture.detectChanges();
   });
-
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -117,5 +122,53 @@ describe('WttrMatCardComponent', () => {
     component.model.state = component.States.RESPONSE_ERROR;
     fixture.detectChanges();
     expect(query_for_el(fixture, '.error[data-test="wttr-card"]')).toBeTruthy();
+  });
+
+  it('should show the projected form template if the state is \'UNTOUCHED\'', async () => {
+    component.model.state = component.States.UNTOUCHED;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-form"]')).toBeTruthy();
+  });
+
+  it('should show the projected form template if the state is \'VALID\'', () => {
+    component.model.state = component.States.VALID;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-form"]')).toBeTruthy();
+  });
+
+  it('should show the projected form template if the state is \'INVALID\'', () => {
+    component.model.state = component.States.INVALID;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-form"]')).toBeTruthy();
+  });
+
+  it('should show the loading template if the state is \'SEARCHING\'', () => {
+    component.model.state = component.States.SEARCHING;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-loading"]')).toBeTruthy();
+  });
+
+  it('should show the loading template if the state is \'PARSING\'', () => {
+    component.model.state = component.States.PARSING;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-loading"]')).toBeTruthy();
+  });
+
+  it('should show the projected results template if the state is \'DONE\'', () => {
+    component.model.state = component.States.DONE;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-results"]')).toBeTruthy();
+  });
+
+  it('should show the error template if the state is \'PARSE_ERROR\'', () => {
+    component.model.state = component.States.PARSE_ERROR;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-error"]')).toBeTruthy();
+  });
+
+  it('should show the error template if the state is \'RESPONSE_ERROR\'', () => {
+    component.model.state = component.States.RESPONSE_ERROR;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-error"]')).toBeTruthy();
   });
 });
