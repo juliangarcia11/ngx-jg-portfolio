@@ -1,6 +1,7 @@
 import {
   ComponentFixture,
-  TestBed
+  TestBed,
+  tick
 } from '@angular/core/testing';
 
 import { WttrMatCardComponent } from './wttr-mat-card.component';
@@ -14,6 +15,8 @@ import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WttrDisplayModel } from '../../models/wttr-display.model';
 import { query_for_el } from '../../../../spec-utils';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressBarHarness } from '@angular/material/progress-bar/testing';
 
 describe('WttrMatCardComponent', () => {
   let component: WttrMatCardComponent;
@@ -25,6 +28,7 @@ describe('WttrMatCardComponent', () => {
     await TestBed.configureTestingModule({
       imports: [
         MatCardModule,
+        MatProgressBarModule,
         BrowserAnimationsModule,
       ],
       declarations: [ WttrMatCardComponent ]
@@ -48,7 +52,7 @@ describe('WttrMatCardComponent', () => {
   });
 
   /***********************************************************
-   * Basic Mat Card Harness Tests
+   * Basic Mat Harness Tests
    ***********************************************************/
 
   it('should find the mat card', async () => {
@@ -66,6 +70,20 @@ describe('WttrMatCardComponent', () => {
     const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="wttr-card"]'}));
     expect(cards.length).toBe(1);
     expect(await cards[0].getSubtitleText()).toBe(mockedModel.subtitle);
+  });
+
+  it('should find the mat progress bar if the state is \'SEARCHING\'', async () => {
+    component.model.state = component.States.SEARCHING;
+    fixture.detectChanges();
+    const progressBar = await loader.getAllHarnesses(MatProgressBarHarness);
+    expect(progressBar.length).toBe(1);
+  });
+
+  it('should find the mat progress bar if the state is \'PARSING\'', async () => {
+    component.model.state = component.States.PARSING;
+    fixture.detectChanges();
+    const progressBar = await loader.getAllHarnesses(MatProgressBarHarness);
+    expect(progressBar.length).toBe(1);
   });
 
   /***********************************************************

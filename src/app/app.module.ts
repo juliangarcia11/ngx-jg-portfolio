@@ -43,6 +43,7 @@ import {HomesComponent} from './components/homes/homes.component';
 import {BookingComponent} from './components/booking/booking.component';
 import {MatCardModule} from "@angular/material/card";
 import { WttrMatCardComponent } from './components/wttr-display/components/wttr-mat-card/wttr-mat-card.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { WttrMatCardComponent } from './components/wttr-display/components/wttr-
     MatListModule,
     MatTooltipModule,
     MatCardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressBarModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500}}
