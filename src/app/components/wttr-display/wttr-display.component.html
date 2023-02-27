@@ -1,4 +1,4 @@
-<app-wttr-mat-card [model]="model" data-test="wttr-mat-card">
+<app-wttr-mat-card *ngIf="model" [model]="model" data-test="wttr-mat-card">
 
     <!-- To be projected into our custom mat card -->
 
@@ -37,5 +37,9 @@
 
     <!-- NOTE: Search Results to be projected into the app-wttr-mat-card -->
     <div results [innerHTML]="model.result"></div>
+
+    <ng-container actions>
+        <button (click)="resetDisplay()" mat-raised-button color="accent">Back to search</button>
+    </ng-container>
 
 </app-wttr-mat-card>

@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,21 +17,18 @@ import { SearchStates } from './models/search-states.enum';
   templateUrl: './wttr-display.component.html',
   styleUrls: ['./wttr-display.component.scss']
 })
-export class WttrDisplayComponent {
+export class WttrDisplayComponent implements OnInit {
 
-  public searchFormExpanded = true;
-
-  model: WttrDisplayModel;
-  searchForm: FormGroup;
+  model!: WttrDisplayModel;
+  searchForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private weatherService: WttrService
-  ) {
-    this.model = new WttrDisplayModel();
-    this.searchForm = this.fb.group({
-      search: this.fb.control(this.model.search, [Validators.required, Validators.minLength(1)])
-    });
+  ) { }
+
+  ngOnInit() {
+    this.resetDisplay();
   }
 
   getErrorMessage(controlName: string): string {
@@ -55,6 +55,13 @@ export class WttrDisplayComponent {
         console.info('wttr search complete');
         this.model.state = SearchStates.DONE;
       }
+    });
+  }
+
+  resetDisplay() {
+    this.model = new WttrDisplayModel();
+    this.searchForm = this.fb.group({
+      search: this.fb.control(this.model.search, [Validators.required, Validators.minLength(1)])
     });
   }
 }

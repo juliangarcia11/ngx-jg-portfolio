@@ -42,4 +42,11 @@
         <ng-content select="[results]"></ng-content>
     </mat-card-content>
 
+    <!-- buttons to be shown during certain states -->
+    <mat-card-actions *ngIf="model.state == States.DONE || model.state == States.PARSE_ERROR || model.state == States.RESPONSE_ERROR"
+                      data-test="wttr-card-actions"
+                      align="end">
+        <ng-content select="[actions]"></ng-content>
+    </mat-card-actions>
+
 </mat-card>

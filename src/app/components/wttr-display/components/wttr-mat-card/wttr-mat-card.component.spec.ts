@@ -189,4 +189,22 @@ describe('WttrMatCardComponent', () => {
     fixture.detectChanges();
     expect(query_for_el(fixture, '[data-test="wttr-card-error"]')).toBeTruthy();
   });
+
+  it('should show the projected actions template if the state is \'DONE\'', () => {
+    component.model.state = component.States.DONE;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-actions"]')).toBeTruthy();
+  });
+
+  it('should show the actions template if the state is \'PARSE_ERROR\'', () => {
+    component.model.state = component.States.PARSE_ERROR;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-actions"]')).toBeTruthy();
+  });
+
+  it('should show the actions template if the state is \'RESPONSE_ERROR\'', () => {
+    component.model.state = component.States.RESPONSE_ERROR;
+    fixture.detectChanges();
+    expect(query_for_el(fixture, '[data-test="wttr-card-actions"]')).toBeTruthy();
+  });
 });
