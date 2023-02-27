@@ -1,21 +1,36 @@
+@import "src/styles";
+
 :host {
     display: flex;
     justify-content: center;
     flex-flow: column;
+    margin-bottom: 5em;
+}
+
+.wttr-card {
+    margin: 0.5em auto 0 auto;
+    box-shadow: 0 0 10px 5px $background-color;
 }
 
 .wttr-card.search {
     width: 45%;
-    margin: auto;
 }
 
 .wttr-card.results {
-    width: 95%;
-    margin: auto;
+
+    .wttr-card-header {
+        display: flex;
+        justify-content: center;
+    }
+
+    ::ng-deep mat-card-content pre {
+        margin-top: 0;
+    }
 }
 
 .wttr-card-header {
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
+    box-shadow: 0 1px 0 0 $background-color;
 }
 
 .wttr-card-subtitle {
