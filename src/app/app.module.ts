@@ -22,6 +22,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatListModule} from "@angular/material/list";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCardModule } from "@angular/material/card";
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 /**
  * Project Modules
@@ -32,26 +35,19 @@ import {AppRoutingModule} from './_routing/app-routing.module';
  * Application Components
  */
 import {AppComponent} from './app.component';
-import {AboutMeComponent} from './components';
-import {ApodDisplayComponent} from './components';
-import {DashboardComponent} from './components';
-import {HeaderComponent} from './components';
-import {WttrDisplayComponent} from './components';
-
-// NOTE: example code; to be removed
-import {HomesComponent} from './components/homes/homes.component';
-import {BookingComponent} from './components/booking/booking.component';
-import {MatCardModule} from "@angular/material/card";
-import { WttrMatCardComponent } from './components/wttr-display/components/wttr-mat-card/wttr-mat-card.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {
+  AboutMeComponent,
+  ApodDisplayComponent,
+  DashboardComponent,
+  HeaderComponent,
+  WttrDisplayComponent,
+  WttrMatCardComponent
+} from './components';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    HomesComponent,
-    BookingComponent,
     WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,
@@ -62,8 +58,6 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AppRoutingModule,
     AppComponent,
     HeaderComponent,
-    HomesComponent,
-    BookingComponent,
     WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,

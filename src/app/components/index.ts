@@ -3,3 +3,4 @@ export { ApodDisplayComponent } from './apod-display/apod-display.component';
 export { DashboardComponent } from './dashboard/dashboard.component';
 export { HeaderComponent } from './header/header.component';
 export { WttrDisplayComponent } from './wttr-display/wttr-display.component';
+export { WttrMatCardComponent } from './wttr-display/components/wttr-mat-card/wttr-mat-card.component';
