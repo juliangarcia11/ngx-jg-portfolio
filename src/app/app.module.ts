@@ -40,9 +40,9 @@ import {
   ApodDisplayComponent,
   DashboardComponent,
   HeaderComponent,
-  WttrDisplayComponent,
-  WttrMatCardComponent
+  WttrDisplayComponent
 } from './components';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -51,8 +51,7 @@ import {
     WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,
-    AboutMeComponent,
-    WttrMatCardComponent
+    AboutMeComponent
   ],
   exports: [
     AppRoutingModule,
@@ -84,7 +83,8 @@ import {
     MatCardModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    SharedModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500}}

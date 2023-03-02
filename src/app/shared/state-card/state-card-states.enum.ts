@@ -1,8 +1,8 @@
 
 /**
- *  The various states the WttrDisplayComponent can get into
+ *  The various states the StateCardComponent can get into
  */
-export enum SearchStates {
+export enum StateCardStates {
 
   // search form is untouched
   UNTOUCHED,
@@ -13,7 +13,7 @@ export enum SearchStates {
   // search form is valid but not submitted
   VALID,
 
-  // search form has been submitted but response has not been recieved
+  // search form has been submitted but response has not been received
   SEARCHING,
 
   // search response received successfully & is being parsed for render

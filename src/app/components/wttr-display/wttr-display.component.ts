@@ -9,7 +9,7 @@ import {
 } from '@angular/forms';
 import { WttrService } from './services/wttr.service';
 import { WttrDisplayModel } from './models/wttr-display.model';
-import { SearchStates } from './models/search-states.enum';
+import { StateCardStates } from '../../shared/state-card/state-card-states.enum';
 
 
 @Component({
@@ -41,19 +41,19 @@ export class WttrDisplayComponent implements OnInit {
 
   submitSearch() {
     this.model.search = this.searchForm.value.search;
-    this.model.state = SearchStates.SEARCHING;
+    this.model.state = StateCardStates.SEARCHING;
     this.weatherService.getText$(this.model.search).subscribe({
       next: (resultingHtml) => {
-        this.model.state = SearchStates.PARSING;
+        this.model.state = StateCardStates.PARSING;
         this.model.result = resultingHtml;
       },
       error: (e) => {
         console.error(e);
-        this.model.state = SearchStates.RESPONSE_ERROR;
+        this.model.state = StateCardStates.RESPONSE_ERROR;
       },
       complete: () => {
         console.info('wttr search complete');
-        this.model.state = SearchStates.DONE;
+        this.model.state = StateCardStates.DONE;
       }
     });
   }

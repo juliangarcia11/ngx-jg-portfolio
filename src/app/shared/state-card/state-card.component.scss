@@ -1,4 +1,4 @@
-@import "src/styles";
+@import "../../../styles";
 
 :host {
     display: flex;
@@ -7,24 +7,24 @@
     margin-bottom: 5em;
 }
 
-.wttr-card {
+.state-card {
     margin: 0.5em auto 0 auto;
     box-shadow: 0 0 10px 5px $background-color;
 }
 
-.wttr-card.search {
+.state-card.search {
     width: 45%;
 }
 
-.wttr-card.loading mat-card-content {
+.state-card.loading mat-card-content {
     display: flex;
     justify-content: center;
     align-content: center;
 }
 
-.wttr-card.results {
+.state-card.results {
 
-    .wttr-card-header {
+    .state-card-header {
         display: flex;
         justify-content: center;
     }
@@ -34,7 +34,7 @@
     }
 }
 
-.wttr-card-header {
+.state-card-header {
     margin-bottom: 1em;
     box-shadow: 0 1px 0 0 $background-color;
 }

@@ -1,8 +1,8 @@
-<app-wttr-mat-card *ngIf="model" [model]="model" data-test="wttr-mat-card">
+<app-state-card *ngIf="model" [model]="model" data-test="wttr-mat-card">
 
     <!-- To be projected into our custom mat card -->
 
-    <!-- NOTE: Search Form to be projected into the app-wttr-mat-card -->
+    <!-- NOTE: Search Form to be projected into the app-state-card -->
     <ng-container searchForm>
         <form  (ngSubmit)="submitSearch()" class="wttr-search">
             <mat-form-field [formGroup]="searchForm" class="wttr-search-form-field" hintLabel="Max 50 characters"
@@ -42,4 +42,4 @@
         <button (click)="resetDisplay()" mat-raised-button color="accent">Back to search</button>
     </ng-container>
 
-</app-wttr-mat-card>
+</app-state-card>

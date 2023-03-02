@@ -1,16 +1,16 @@
 
 <!-- Note: All Wttr Displays share a common mat-card & mat-card-header -->
 <!-- Note: MatContent projected depends on the model.state -->
-<mat-card class="wttr-card"
+<mat-card class="state-card"
           [class]="model.cardCssClass"
-          data-test="wttr-card">
+          data-test="state-card">
 
     <!----------------------------------------------------------------------->
     <!-- card header -->
     <!----------------------------------------------------------------------->
-    <mat-card-header class="wttr-card-header">
+    <mat-card-header class="state-card-header">
         <mat-card-title>{{ model.cardTitle }}</mat-card-title>
-        <mat-card-subtitle class="wttr-card-subtitle">{{ model.subtitle }}</mat-card-subtitle>
+        <mat-card-subtitle class="state-card-subtitle">{{ model.subtitle }}</mat-card-subtitle>
     </mat-card-header>
 
     <!----------------------------------------------------------------------->
@@ -19,32 +19,32 @@
 
     <!-- form content-->
     <mat-card-content *ngIf="model.state == States.UNTOUCHED || model.state == States.VALID || model.state == States.INVALID"
-                      data-test="wttr-card-form">
+                      data-test="state-card-form">
         <!-- Note: Projected content lands here :) -->
         <ng-content select="[searchForm]"></ng-content>
     </mat-card-content>
 
     <!-- loading content -->
     <mat-card-content *ngIf="model.state == States.SEARCHING || model.state == States.PARSING"
-                      data-test="wttr-card-loading">
+                      data-test="state-card-loading">
         <mat-spinner color="primary" mode="indeterminate"></mat-spinner>
     </mat-card-content>
 
     <!-- error content -->
     <mat-card-content *ngIf="model.state == States.PARSE_ERROR || model.state == States.RESPONSE_ERROR"
-                      data-test="wttr-card-error">
+                      data-test="state-card-error">
         fake error content
     </mat-card-content>
 
     <!-- results content -->
-    <mat-card-content *ngIf="model.state == States.DONE" data-test="wttr-card-results">
+    <mat-card-content *ngIf="model.state == States.DONE" data-test="state-card-results">
         <!-- Note: Projected content lands here :) -->
         <ng-content select="[results]"></ng-content>
     </mat-card-content>
 
     <!-- buttons to be shown during certain states -->
     <mat-card-actions *ngIf="model.state == States.DONE || model.state == States.PARSE_ERROR || model.state == States.RESPONSE_ERROR"
-                      data-test="wttr-card-actions"
+                      data-test="state-card-actions"
                       align="end">
         <ng-content select="[actions]"></ng-content>
     </mat-card-actions>
