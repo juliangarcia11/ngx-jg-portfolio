@@ -1,0 +1,12 @@
+@import "../../../../styles";
+@import "../../../styles/flex";
+
+.mat-toolbar-single-row.flex-row-w-columns {
+  @extend .flex-row-w-columns;
+  align-items: center;
+}
+
+.mat-toolbar-single-row .column:first-of-type {
+  @extend .flex-row;
+  align-items: center;
+}

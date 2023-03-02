@@ -29,7 +29,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 /**
  * Project Modules
  */
-import {AppRoutingModule} from './_routing/app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
 
 /**
  * Application Components
@@ -38,17 +38,15 @@ import {AppComponent} from './app.component';
 import {
   AboutMeComponent,
   ApodDisplayComponent,
-  DashboardComponent,
-  HeaderComponent,
-  WttrDisplayComponent
-} from './components';
+  DashboardComponent
+} from './features';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
+import { WttrDisplayModule } from './features/wttr-display/wttr-display.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,
     AboutMeComponent
@@ -56,8 +54,6 @@ import { SharedModule } from './shared/shared.module';
   exports: [
     AppRoutingModule,
     AppComponent,
-    HeaderComponent,
-    WttrDisplayComponent,
     DashboardComponent,
     ApodDisplayComponent,
     AboutMeComponent
@@ -84,7 +80,11 @@ import { SharedModule } from './shared/shared.module';
     ReactiveFormsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
-    SharedModule
+
+    CoreModule,
+    SharedModule,
+
+    WttrDisplayModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500}}

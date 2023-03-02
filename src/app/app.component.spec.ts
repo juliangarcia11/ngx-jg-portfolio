@@ -2,22 +2,32 @@ import {ComponentFixture, fakeAsync, TestBed, tick} from '@angular/core/testing'
 import {RouterTestingModule} from '@angular/router/testing';
 import {AppComponent} from './app.component';
 import {HttpClientTestingModule} from "@angular/common/http/testing";
-import {DataService} from "./services/data.service";
 import {spyOnClass} from "jasmine-es6-spies/dist";
-import {DialogService} from "./services/dialog.service";
 import {Router, RouterOutlet} from "@angular/router";
 import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {click_item, query_for_all_el, query_for_el} from "./spec-utils";
 import {MatListModule} from "@angular/material/list";
 import {Location} from '@angular/common';
-import {AppRoutes} from "./_routing/app-routes";
-import {HeaderComponent} from "./components";
 import {Clipboard, ClipboardModule} from "@angular/cdk/clipboard"
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+
+import { HeaderComponent } from './core/components';
+import {
+  DataService,
+  DialogService
+} from './core/services';
+
+import {
+  click_item,
+  query_for_all_el,
+  query_for_el
+} from './core/utils';
+
+
+import { AppRoutes } from './app-routes';
 
 describe('AppComponent', () => {
   let component: AppComponent;
