@@ -1,9 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { WttrDisplayRoutingModule } from './wttr-display-routing.module';
-import { SharedModule } from '../../shared/shared.module';
-import { WttrDisplayComponent } from './wttr-display.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {
   FormsModule,
@@ -13,26 +9,34 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 
+import { SharedModule } from '../../shared/shared.module';
+import { WttrRoutingModule } from './wttr-routing.module';
+
+import { WttrComponent } from './pages/wttr.component';
+import { WttrSearchFormComponent } from './components/wttr-search-form/wttr-search-form.component';
+
 
 @NgModule({
   declarations: [
-    WttrDisplayComponent
+    WttrComponent,
+    WttrSearchFormComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
 
     SharedModule,
 
-    WttrDisplayRoutingModule,
+    WttrRoutingModule,
   ],
   exports: [
-    WttrDisplayComponent
+    WttrSearchFormComponent,
+    WttrComponent
   ]
 })
-export class WttrDisplayModule { }
+export class WttrModule { }

@@ -42,7 +42,7 @@ import {
 } from './features';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { WttrDisplayModule } from './features/wttr-display/wttr-display.module';
+import { WttrModule } from './features/wttr-module/wttr.module';
 
 @NgModule({
   declarations: [
@@ -84,7 +84,7 @@ import { WttrDisplayModule } from './features/wttr-display/wttr-display.module';
     CoreModule,
     SharedModule,
 
-    WttrDisplayModule
+    WttrModule
   ],
   providers: [
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 1500}}

@@ -1,9 +1,9 @@
 import {Route, Routes} from "@angular/router";
-import {AboutMeComponent, ApodDisplayComponent, DashboardComponent, WttrDisplayComponent} from "./features";
+import {AboutMeComponent, ApodDisplayComponent, DashboardComponent} from "./features";
 
 export const AppRoutes: Routes = [
   {path: 'dashboard', title: 'Dashboard', data: {icon: 'home'}, component: DashboardComponent},
-  {path: 'wttr', title: 'Wttr API', data: {icon: 'cloud'}, loadChildren: () => import('./features/wttr-display/wttr-display.module').then(m => m.WttrDisplayModule)},
+  {path: 'wttr', title: 'Wttr API', data: {icon: 'cloud'}, loadChildren: () => import('./features/wttr-module/wttr.module').then(m => m.WttrModule)},
   {path: 'apod', title: 'APOD API', data: {icon: 'photo_camera'}, component: ApodDisplayComponent},
   {path: 'about-dev', title: 'About the Developer', data: {icon: 'info'}, component: AboutMeComponent},
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'}, // redirect to `dashboard` on empty path

@@ -1,81 +1,58 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WttrDisplayComponent } from './wttr-display.component';
-import {click_item, query_for_el} from '../../core/utils';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {MatInputModule} from "@angular/material/input";
-import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
-import {HarnessLoader} from "@angular/cdk/testing";
-import {MatCardModule} from "@angular/material/card";
-import {MatFormFieldHarness} from "@angular/material/form-field/testing";
-import {MatInputHarness} from "@angular/material/input/testing";
-import {MatIconModule} from "@angular/material/icon";
-import {spyOnClass} from "jasmine-es6-spies/dist";
-import {WttrService} from "./services/wttr.service";
-import { WttrDisplayModel } from './models/wttr-display.model';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { WttrSearchFormComponent } from './wttr-search-form.component';
+import { MatFormFieldHarness } from '@angular/material/form-field/testing';
+import { MatInputHarness } from '@angular/material/input/testing';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import {
+  click_item,
+  query_for_el
+} from '../../../../core/utils';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import {
+  FormBuilder,
+  ReactiveFormsModule
+} from '@angular/forms';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
-describe('WttrDisplayComponent', () => {
-  let component: WttrDisplayComponent;
+describe('WttrSearchFormComponent', () => {
+  let component: WttrSearchFormComponent;
   let loader: HarnessLoader;
-  let fixture: ComponentFixture<WttrDisplayComponent>;
-  let expectedModel = new WttrDisplayModel();
+  let fixture: ComponentFixture<WttrSearchFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [
-        MatCardModule,
         MatFormFieldModule,
+        MatButtonModule,
         MatInputModule,
-        MatIconModule,
         ReactiveFormsModule,
-        BrowserAnimationsModule,
-        FormsModule
+        NoopAnimationsModule,
+        MatIconModule
       ],
-      declarations: [ WttrDisplayComponent ],
+      declarations: [ WttrSearchFormComponent ],
       providers: [
-        {provide: WttrService, useFactory: () => spyOnClass(WttrService)},
+        FormBuilder
       ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(WttrDisplayComponent);
+    fixture = TestBed.createComponent(WttrSearchFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
-  });
-
-  // before each test, set the model
-  beforeEach(() => {
-    component.model = expectedModel;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should show a wttr-mat-card', () => {
-    expect(query_for_el(fixture, '[data-test="wttr-mat-card"]')).toBeTruthy();
-  });
-
-  it('should show a search input', () => {
-    expect(query_for_el(fixture, 'input[data-test="wttr-search-input"]')).toBeTruthy();
-  });
-
   it('should show a search button', () => {
     expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]')).toBeTruthy();
-  });
-
-  it('should show a DISABLED search button by default', () => {
-    expect(query_for_el(fixture, 'button[data-test="wttr-search-button"]').disabled).toBeTruthy();
-  });
-
-  it('should have model', () => {
-    expect(component.model).toBe(expectedModel);
   });
 
   it('should find search form field', async () => {
@@ -90,7 +67,7 @@ describe('WttrDisplayComponent', () => {
 
   it('should be able to check if search form field is invalid', async () => {
     const formField = await loader.getHarness(MatFormFieldHarness);
-    component.searchForm.get('search')?.setValue('');
+    component.searchControl.setValue('');
     expect(await formField.isControlValid()).toBe(false);
   });
 
@@ -106,7 +83,7 @@ describe('WttrDisplayComponent', () => {
 
   it('should be able to disable formField', async () => {
     const formField = await loader.getHarness(MatFormFieldHarness);
-    component.searchForm.get('search')?.disable();
+    component.searchControl?.disable();
     expect(await formField.isDisabled()).toBe(true);
   });
 

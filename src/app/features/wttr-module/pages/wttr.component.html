@@ -1,0 +1,24 @@
+<app-state-card *ngIf="model"
+                [model]="model"
+                data-test="wttr-state-card">
+
+    <!-- To be projected into our custom mat card -->
+
+    <!-- NOTE: Search Form to be projected into the app-state-card -->
+    <app-wttr-search-form searchForm
+                          (onSubmit)="submitSearch($event)"
+                          data-test="wttr-search-form">
+    </app-wttr-search-form>
+
+    <!-- NOTE: Search Results to be projected into the app-wttr-mat-card -->
+    <div results [innerHTML]="model.result"
+         data-test="wttr-search-results"></div>
+
+    <ng-container actions>
+        <button (click)="resetDisplay()"
+                mat-raised-button
+                color="accent"
+                data-test="wttr-search-reset">Back to search</button>
+    </ng-container>
+
+</app-state-card>

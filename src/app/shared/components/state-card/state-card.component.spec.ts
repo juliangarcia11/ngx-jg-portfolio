@@ -13,7 +13,7 @@ import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { WttrDisplayModel } from '../../../features/wttr-display/models/wttr-display.model';
+import { WttrDisplayModel } from '../../../features/wttr-module/models/wttr-display.model';
 import { query_for_el } from '../../../core/utils/testing-utils';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressSpinnerHarness } from '@angular/material/progress-spinner/testing';

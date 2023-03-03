@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, Routes} from "@angular/router";
 import {AppRoutes, DashboardRoute} from "./app-routes";
 import {filter} from "rxjs";
-import {HeaderInterface} from "./core/components/header/header.interface";
+import {HeaderInterface} from './core/components';
 
 @Component({
   selector: 'app-root',

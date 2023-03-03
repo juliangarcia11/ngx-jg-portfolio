@@ -1,0 +1,31 @@
+<mat-form-field class="wttr-search-form-field"
+                hintLabel="Max 50 characters"
+                appearance="fill">
+    <mat-label>city, state <b>or</b> zip code <b>or</b> airport code</mat-label>
+
+    <!------------- USER INPUT ------------->
+    <input #searchInput
+           matInput
+           maxlength="50"
+           placeholder="Ex. LAX"
+           type="text"
+           [formControl]="searchControl"
+           class="wttr-search-input"
+           data-test="wttr-search-input">
+
+    <!------------- SUBMIT BUTTON ------------->
+    <button mat-mini-fab
+            matSuffix
+            class="wttr-search-button"
+            color="accent"
+            type="button"
+            (click)="submitSearch()"
+            [disabled]="searchInput.disabled || searchInput?.value?.length == 0"
+            [attr.aria-label]="'Search for the weather'"
+            data-test="wttr-search-button">
+        <mat-icon>search</mat-icon>
+    </button>
+
+    <mat-error *ngIf="searchControl.invalid">{{ getErrorMessage() }}</mat-error>
+
+</mat-form-field>

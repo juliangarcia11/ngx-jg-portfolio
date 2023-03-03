@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WttrDisplayComponent } from './wttr-display.component';
+import { WttrComponent } from './pages/wttr.component';
 
 const routes: Routes = [
-  {path: '', component: WttrDisplayComponent},
+  {path: '', component: WttrComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class WttrDisplayRoutingModule { }
+export class WttrRoutingModule { }
