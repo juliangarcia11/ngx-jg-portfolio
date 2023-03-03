@@ -50,8 +50,7 @@ describe('AppRoutingModule', () => {
     expect(location.path()).toBe('/dashboard');
   }));
 
-  // TODO: how to check sub module is loaded?
-  xit('should navigate to "/wttr" when "wttr" route is navigated to', fakeAsync(() => {
+  it('should navigate to "/wttr" when "wttr" route is navigated to', fakeAsync(() => {
     router.navigate(['wttr']);
     tick();
     expect(location.path()).toBe('/wttr');

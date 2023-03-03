@@ -38,7 +38,7 @@ import {AppComponent} from './app.component';
 import {
   AboutMeComponent,
   ApodDisplayComponent,
-  DashboardComponent
+  DashboardModule
 } from './features';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
@@ -47,14 +47,12 @@ import { WttrModule } from './features/wttr-module/wttr.module';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
     ApodDisplayComponent,
     AboutMeComponent
   ],
   exports: [
     AppRoutingModule,
     AppComponent,
-    DashboardComponent,
     ApodDisplayComponent,
     AboutMeComponent
   ],
@@ -84,6 +82,7 @@ import { WttrModule } from './features/wttr-module/wttr.module';
     CoreModule,
     SharedModule,
 
+    DashboardModule,
     WttrModule
   ],
   providers: [
