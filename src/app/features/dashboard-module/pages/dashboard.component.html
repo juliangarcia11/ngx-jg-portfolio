@@ -10,14 +10,9 @@
     <mat-card-content class="dashboard-welcome-card-content" data-test="dashboard-welcome-card-content">
         What would you like to try out?
         <div class="dashboard-preview-card-list">
-            <mat-card *ngFor="let option of redirects; let index = index"
-                      class="dashboard-preview-card"
-                      data-test="dashboard-preview-card">
-                <mat-card-header>
-                    <mat-card-title>{{ option.title }}</mat-card-title>
-                    <mat-card-subtitle>{{ option.subtitle }}</mat-card-subtitle>
-                </mat-card-header>
-            </mat-card>
+            <app-feature-preview-card *ngFor="let option of redirects; let index = index"
+                                      [feature]="option"
+                      data-test="dashboard-preview-card"></app-feature-preview-card>
         </div>
 
     </mat-card-content>
