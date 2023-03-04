@@ -1,4 +1,5 @@
 import { StateCardModel, StateCardStates } from '../../../shared/components';
+import { WttrConst } from './wttr.const';
 
 export class WttrDisplayModel extends StateCardModel {
 
@@ -10,7 +11,9 @@ export class WttrDisplayModel extends StateCardModel {
 
   constructor() {
     super();
-    this.errorTitle = 'Someone stole the weather! :o';
+    this.defaultTitle = WttrConst.title;
+    this.subtitle = WttrConst.subtitle;
+    this.errorTitle = WttrConst.errorTitle;
     this.state = StateCardStates.UNTOUCHED;
     this.search = '';
     this.result = '';

@@ -1,5 +1,6 @@
 import {Route, Routes} from "@angular/router";
 import {AboutMeComponent, ApodDisplayComponent} from "./features";
+import { WttrConst } from './features/wttr-module/models/wttr.const';
 
 export const AppRoutes: Routes = [
   {
@@ -11,7 +12,7 @@ export const AppRoutes: Routes = [
   {
     path:         'wttr',
     title:        'Wttr API',
-    data:         {icon: 'cloud'},
+    data:         {icon: 'cloud', preview: WttrConst},
     loadChildren: () => import('./features/wttr-module/wttr.module').then(m => m.WttrModule)
   },
   {path: 'apod', title: 'APOD API', data: {icon: 'photo_camera'}, component: ApodDisplayComponent},
@@ -20,6 +21,17 @@ export const AppRoutes: Routes = [
   {path: '**', redirectTo: ''}  // redirect to `` when no path matches
 ];
 
-export const DashboardRoute = (): Route | undefined => {
-  return AppRoutes.find(r => r.path === 'dashboard');
-}
+/**
+ * @returns Route The object defining the dashboard route
+ */
+export const DashboardRoute = AppRoutes.find(r => r.path && r.path === 'dashboard');
+
+/**
+ * @returns Routes | Route[] The objects defining the routes with valid 'path' parameters
+ */
+export const PathRoutes = AppRoutes.filter(r => r.path && !['**', ''].includes(r.path));
+
+/**
+ * @returns Routes | Route[] The objects defining the routes with an object set to the Route.data.preview param
+ */
+export const PreviewableRoutes = AppRoutes.filter(r => r.path && r.data && r.data['preview']);

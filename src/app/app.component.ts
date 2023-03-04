@@ -1,6 +1,10 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, Routes} from "@angular/router";
-import {AppRoutes, DashboardRoute} from "./app-routes";
+import {
+  AppRoutes,
+  DashboardRoute,
+  PathRoutes
+} from './app-routes';
 import {filter} from "rxjs";
 import {HeaderInterface} from './core/components';
 
@@ -19,7 +23,7 @@ export class AppComponent {
 
   constructor(private router: Router, private route: ActivatedRoute) {
     // filter out default route catching and store the set of potential navigation routes to be displayed in the side nav
-    this.navigationRoutes = AppRoutes.filter(route => !['**', ''].includes(route.path ?? ''));
+    this.navigationRoutes = PathRoutes;
 
     // listen for the end of any navigation movement on the router
     router.events.pipe(
@@ -60,7 +64,7 @@ export class AppComponent {
 
     // if the current routeTitle matches the DashboardRoute's title or the empty string, return the App's Title
     // else return the current routeTitle
-    return [DashboardRoute()?.title ?? '', ''].includes(routeTitle) ? this.appTitle : routeTitle;
+    return [DashboardRoute?.title ?? '', ''].includes(routeTitle) ? this.appTitle : routeTitle;
   }
 
   /**

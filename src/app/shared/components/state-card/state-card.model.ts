@@ -17,24 +17,24 @@ export class StateCardModel {
     this.updateCardValues();
   }
 
-  protected _cardTitle: string = this.defaultTitle;
+  private _cardTitle: string = this.defaultTitle;
   public get cardTitle(): string { return this._cardTitle; }
   public set cardTitle(value: string) { this._cardTitle = value; }
 
-  protected _cardCssClass: 'search' | 'search loading' | 'results' | 'error' = 'search';
+  private _cardCssClass: 'search' | 'search loading' | 'results' | 'error' = 'search';
   public get cardCssClass(): 'search' | 'search loading' | 'results' | 'error' { return this._cardCssClass; }
   public set cardCssClass(value: 'search' | 'search loading' | 'results' | 'error') { this._cardCssClass = value; }
 
-  private _defaultTitle: string = 'Search for the weather';
+  private _defaultTitle: string = 'Default State Card Title';
   public get defaultTitle(): string { return this._defaultTitle; }
   public set defaultTitle(value: string) { this._defaultTitle = value; }
 
-  private _subtitle: string = 'Powered by \'wttr.in\'';
+  private _subtitle: string = 'Default State Card Subtitle';
   public get subtitle(): string { return this._subtitle; }
   public set subtitle(value: string) { this._subtitle = value; }
 
   protected _resultsTitle: string = 'Results';
-  public get resultsTitle(): string { return `Wttr Results for: '${this._resultsTitle}'`; }
+  public get resultsTitle(): string { return this._resultsTitle; }
   public set resultsTitle(value: string) { this._resultsTitle = value; }
 
   private _errorTitle: string = 'Something went wrong! :o';
