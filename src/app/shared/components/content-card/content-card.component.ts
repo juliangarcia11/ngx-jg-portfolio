@@ -11,6 +11,9 @@ import {
 })
 export class ContentCardComponent {
 
+  @Input()
+  headerAsRow = true;
+
   @ViewChild('title')
   title?: HTMLElement;
 

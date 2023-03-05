@@ -26,6 +26,11 @@ describe('ContentCardComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // TODO: more tests about this
+  it('should have a headerAsRow param', async () => {
+    expect(component.headerAsRow).toBeDefined();
+  });
+
   it('should find the card with content', async () => {
     expect(query_for_el(fixture, '[data-test="content-card-content"]')).toBeTruthy();
   });

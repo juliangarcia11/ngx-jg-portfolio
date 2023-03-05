@@ -1,6 +1,8 @@
 <mat-card class="content-card" data-test="content-card">
 
-    <div class="content-card-header" data-test="content-card-header">
+    <div class="content-card-header"
+         [class.header-column]="!headerAsRow"
+         data-test="content-card-header">
 
         <mat-card-title data-test="content-card-title">
             <!--------------------- projected title, or none if none provided ---------------------->
@@ -9,7 +11,7 @@
 
         </mat-card-title>
 
-        <div class="spacer"></div>
+        <div *ngIf="headerAsRow" class="spacer"></div>
 
         <mat-card-subtitle data-test="content-card-subtitle">
             <!--------------------- projected subtitle, or none if none provided ---------------------->

@@ -1,7 +1,13 @@
-<mat-card class="dashboard-preview-card"
-          data-test="dashboard-preview-card">
-    <mat-card-header *ngIf="feature">
-        <mat-card-title>{{ feature.title }}</mat-card-title>
-        <mat-card-subtitle>{{ feature.subtitle }}</mat-card-subtitle>
-    </mat-card-header>
-</mat-card>
+<app-content-card *ngIf="feature"
+                  class="feature-preview-card"
+                  [headerAsRow]="false"
+                  data-test="feature-preview-card">
+
+    <ng-container title>{{ feature.title }}</ng-container>
+    <ng-container subtitle> {{ feature.subtitle }}</ng-container>
+
+    <ng-container content>
+        button later
+    </ng-container>
+
+</app-content-card>

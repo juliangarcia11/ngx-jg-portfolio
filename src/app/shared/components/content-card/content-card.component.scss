@@ -13,9 +13,13 @@
     padding-left: 1em;
     padding-right: 1em;
 
-    .spacer {
-        flex-grow: 2;
+    &.header-column {
+        flex-direction: column;
     }
+}
+
+.content-card-header .spacer {
+    flex-grow: 2;
 }
 
 .content-card-content {
