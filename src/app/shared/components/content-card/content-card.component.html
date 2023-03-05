@@ -5,7 +5,7 @@
          data-test="header">
 
         <mat-card-title data-test="title">
-            <!--------------------- projected title, or none if none provided ---------------------->
+            <!--------------------- projected title, or default if none provided ---------------------->
             <ng-content #title select="[title]"></ng-content>
             <ng-container *ngIf="title != undefined">No Title Provided</ng-container>
 
@@ -14,7 +14,7 @@
         <div *ngIf="headerAsRow" class="spacer" data-test="spacer"></div>
 
         <mat-card-subtitle data-test="subtitle">
-            <!--------------------- projected subtitle, or none if none provided ---------------------->
+            <!--------------------- projected subtitle, or default if none provided ---------------------->
             <ng-content #subtitle select="[subtitle]"></ng-content>
             <ng-container *ngIf="subtitle != undefined">No Subtitle Provided</ng-container>
 
@@ -23,7 +23,7 @@
     </div>
 
     <mat-card-content class="content-card-content" data-test="content">
-        <!--------------------- projected content, or none if none provided ---------------------->
+        <!--------------------- projected content, or default if none provided ---------------------->
         <ng-content #content></ng-content>
         <ng-container *ngIf="content != undefined">No Content Provided</ng-container>
 
