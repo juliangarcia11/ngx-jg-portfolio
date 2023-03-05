@@ -1,14 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FeaturePreviewCardComponent } from './feature-preview-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MockedFeaturePreviewConst } from '../../models/mocked-feature-preview.const';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
-import { MatCardHarness } from '@angular/material/card/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-fdescribe('FeaturePreviewCardComponent', () => {
+describe('FeaturePreviewCardComponent', () => {
   let component: FeaturePreviewCardComponent;
   let fixture: ComponentFixture<FeaturePreviewCardComponent>;
   let loader: HarnessLoader;

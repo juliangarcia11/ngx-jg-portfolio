@@ -14,7 +14,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
-  let loader: HarnessLoader;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -27,7 +26,6 @@ describe('DashboardComponent', () => {
     fixture = TestBed.createComponent(DashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   it('should create', () => {
@@ -49,5 +47,4 @@ describe('DashboardComponent', () => {
   it('should have a subtitle', async () => {
     expect(component.subtitle.length).toBeGreaterThan(0);
   });
-
 });
