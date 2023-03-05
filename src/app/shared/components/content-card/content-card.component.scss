@@ -1,0 +1,23 @@
+@import "src/styles";
+
+.content-card {
+    padding: 1em;
+}
+
+.content-card-header {
+    border-bottom: solid 0.2em $some-deeppurple;
+    display: flex;
+    flex-direction: row;
+    flex: 1 1;
+    align-items: baseline;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    .spacer {
+        flex-grow: 2;
+    }
+}
+
+.content-card-content {
+    padding: 1em;
+}

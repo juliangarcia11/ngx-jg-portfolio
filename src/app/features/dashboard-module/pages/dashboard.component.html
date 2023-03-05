@@ -1,19 +1,15 @@
+<app-content-card data-test="dashboard-welcome-card">
 
-<mat-card class="dashboard-welcome-card"
-          data-test="dashboard-welcome-card">
-    <div class="dashboard-welcome-card-header" data-test="dashboard-welcome-card-header">
-        <mat-card-title>Welcome to my development playground!</mat-card-title>
-        <div class="spacer"></div>
-        <mat-card-subtitle>Created by Julian Garcia</mat-card-subtitle>
-    </div>
+    <ng-container title>{{ title }}</ng-container>
+    <ng-container subtitle> {{ subtitle }}</ng-container>
 
-    <mat-card-content class="dashboard-welcome-card-content" data-test="dashboard-welcome-card-content">
+    <ng-container content>
         What would you like to try out?
         <div class="dashboard-preview-card-list">
             <app-feature-preview-card *ngFor="let option of redirects; let index = index"
                                       [feature]="option"
-                      data-test="dashboard-preview-card"></app-feature-preview-card>
+                                      data-test="dashboard-preview-card"></app-feature-preview-card>
         </div>
+    </ng-container>
 
-    </mat-card-content>
-</mat-card>
+</app-content-card>

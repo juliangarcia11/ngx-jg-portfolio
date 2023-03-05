@@ -34,20 +34,20 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should find the welcome card with a title', async () => {
-    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="dashboard-welcome-card"]'}));
-    expect(cards.length).toBe(1);
-    expect(await cards[0].getTitleText()).toBeTruthy();
-  });
-
-  it('should find the welcome card with a subtitle', async () => {
-    const cards = await loader.getAllHarnesses(MatCardHarness.with({selector: '[data-test="dashboard-welcome-card"]'}));
-    expect(cards.length).toBe(1);
-    expect(await cards[0].getSubtitleText()).toBeTruthy();
+  it('should find the welcome card', async () => {
+    expect(query_for_el(fixture, '[data-test="dashboard-welcome-card"]')).toBeTruthy();
   });
 
   it('should find at least 1 preview card', async () => {
     expect(query_for_el(fixture, '[data-test="dashboard-preview-card"]')).toBeTruthy();
+  });
+
+  it('should have a title', async () => {
+    expect(component.title.length).toBeGreaterThan(0);
+  });
+
+  it('should have a subtitle', async () => {
+    expect(component.subtitle.length).toBeGreaterThan(0);
   });
 
 });

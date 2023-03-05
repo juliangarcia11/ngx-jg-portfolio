@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import {
+  NgModule,
+  Optional,
+  SkipSelf
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,6 +15,7 @@ import {
   DataService,
   DialogService
 } from './services';
+import { EnsureImportedOnceModule } from './ensure-imported-once.module';
 
 @NgModule({
   declarations: [
@@ -31,4 +36,8 @@ import {
     DialogService
   ]
 })
-export class CoreModule { }
+export class CoreModule extends EnsureImportedOnceModule {
+  public constructor(@SkipSelf() @Optional() parent: CoreModule) {
+    super(parent);
+  }
+}
