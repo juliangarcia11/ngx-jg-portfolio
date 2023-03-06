@@ -104,6 +104,22 @@ describe('WttrSearchFormComponent', () => {
     expect(component.submitSearch).toHaveBeenCalled();
   });
 
+  it('should emit search string when submitSearch() is called', () => {
+    // set up a spy to listen for openSideNav emissions
+    spyOn(component.onSubmit, 'emit');
+
+    // manually call submission
+    component.submitSearch();
+
+    // assert the event emission occurred
+    expect(component.onSubmit.emit).toHaveBeenCalled();
+  });
+
+  it('should return a string when getErrorMessage is called', () => {
+    expect(component.getErrorMessage()).toBeTruthy();
+    expect(component.getErrorMessage().length).toBeTruthy();
+  })
+
   /********************************************************
    * Helper Functions
    * *******************************************************/

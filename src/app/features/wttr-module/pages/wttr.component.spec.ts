@@ -1,19 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  TestBed
+} from '@angular/core/testing';
 
 import { WttrComponent } from './wttr.component';
-import {click_item, query_for_el} from '../../../core/utils';
-import {TestbedHarnessEnvironment} from "@angular/cdk/testing/testbed";
-import {HarnessLoader} from "@angular/cdk/testing";
-import {spyOnClass} from "jasmine-es6-spies/dist";
-import {WttrService} from "../services/wttr.service";
+import { query_for_el } from '../../../core/utils';
+import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
+import { HarnessLoader } from '@angular/cdk/testing';
+import { WttrService } from '../services/wttr.service';
 import { WttrDisplayModel } from '../models/wttr-display.model';
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA
-} from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { WttrSearchFormComponent } from '../components/wttr-search-form/wttr-search-form.component';
 import { FormBuilder } from '@angular/forms';
+import { StateCardStates } from '../../../shared/components';
+import {
+  of,
+  throwError
+} from 'rxjs';
+
+class MockedWttrService {
+  getText$ = (search: string) => search.length > 0 ? of(search) : throwError('no search');
+}
 
 describe('WttrComponent', () => {
   let component: WttrComponent;
@@ -30,7 +37,7 @@ describe('WttrComponent', () => {
       declarations: [ WttrComponent ],
       providers: [
         FormBuilder,
-        {provide: WttrService, useFactory: () => spyOnClass(WttrService)},
+        {provide: WttrService, useClass: MockedWttrService},
       ]
     })
     .compileComponents();
@@ -44,6 +51,7 @@ describe('WttrComponent', () => {
   // before each test, set the model
   beforeEach(() => {
     component.model = expectedModel;
+    component.model.state = StateCardStates.UNTOUCHED;
     fixture.detectChanges();
   });
 
@@ -71,6 +79,23 @@ describe('WttrComponent', () => {
     expect(component.model.result).toBe('');
   });
 
+  it('should change the model state after \'submitSearch()\' is called', () => {
+    expect(component.model.state).toBe(StateCardStates.UNTOUCHED);
+
+    // manually call the search function
+    component.submitSearch('mocked search');
+    fixture.detectChanges();
+
+    expect(component.model.state).not.toBe(StateCardStates.UNTOUCHED);
+  });
+
+  it('should change the model state to RESPONSE_ERROR if \'submitSearch()\' errors', () => {
+    // manually call the search function
+    component.submitSearch('');
+    fixture.detectChanges();
+
+    expect(component.model.state).toBe(StateCardStates.RESPONSE_ERROR);
+  });
 
   /*********************************************************
    * HTML Element Specs
