@@ -5,3 +5,12 @@
     margin: auto;
     max-width: 20%;
 }
+
+.feature-preview-card ::ng-deep .content-card-header.header-column {
+    border-bottom: 0;
+}
+.feature-preview-card ::ng-deep .mat-mdc-card-content.content-card-content {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 0;
+}

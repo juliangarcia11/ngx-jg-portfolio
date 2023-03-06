@@ -6,6 +6,8 @@ import { DashboardComponent } from './pages/dashboard.component';
 import { MatCardModule } from '@angular/material/card';
 import { FeaturePreviewCardComponent } from './components/feature-preview-card/feature-preview-card.component';
 import { SharedModule } from '../../shared/shared.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -16,8 +18,10 @@ import { SharedModule } from '../../shared/shared.module';
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    SharedModule,
     MatCardModule,
-    SharedModule
+    MatButtonModule,
+    MatIconModule
   ],
   exports: [
     DashboardComponent

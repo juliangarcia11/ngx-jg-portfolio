@@ -14,7 +14,7 @@ export class DashboardComponent {
 
   title = DashboardConst.title;
   subtitle = DashboardConst.subtitle;
-  previews: RoutePreviewInterface[];
+  previews: RoutePreview[];
 
   constructor() {
     this.previews = PreviewRoutes?.map(route => new RoutePreview(route)) ?? [];

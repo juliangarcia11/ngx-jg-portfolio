@@ -2,7 +2,7 @@ import {
   Component,
   Input
 } from '@angular/core';
-import { RoutePreviewInterface } from '../../../../core/models';
+import { RoutePreview } from '../../../../shared/models/route-preview.model';
 
 @Component({
   selector: 'app-feature-preview-card',
@@ -12,6 +12,6 @@ import { RoutePreviewInterface } from '../../../../core/models';
 export class FeaturePreviewCardComponent {
 
   @Input()
-  feature!: RoutePreviewInterface;
+  feature!: RoutePreview;
 
 }

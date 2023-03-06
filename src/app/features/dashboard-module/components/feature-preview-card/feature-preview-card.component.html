@@ -4,10 +4,16 @@
                   data-test="feature-preview-card">
 
     <ng-container title>{{ feature.title }}</ng-container>
-    <ng-container subtitle> {{ feature.subtitle }}</ng-container>
+    <ng-container subtitle>{{ feature.subtitle }}</ng-container>
 
     <ng-container content>
-        button later
+        <a mat-raised-button
+           color="primary"
+           [routerLink]="['/' + feature.path ]"
+           data-test="feature-preview-link">
+            Explore
+            <mat-icon>{{ feature.icon }}</mat-icon>
+        </a>
     </ng-container>
 
 </app-content-card>
