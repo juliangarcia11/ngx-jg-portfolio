@@ -34,4 +34,4 @@ export const PathRoutes = AppRoutes.filter(r => r.path && !['**', ''].includes(r
 /**
  * @returns Routes | Route[] The objects defining the routes with an object set to the Route.data.preview param
  */
-export const PreviewableRoutes = AppRoutes.filter(r => r.path && r.data && r.data['preview']);
+export const PreviewRoutes = AppRoutes.filter(r => r.path && r.data && r.data['preview']);

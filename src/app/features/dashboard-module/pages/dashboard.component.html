@@ -6,7 +6,7 @@
     <ng-container content>
         What would you like to try out?
         <div class="dashboard-preview-card-list">
-            <app-feature-preview-card *ngFor="let option of redirects; let index = index"
+            <app-feature-preview-card *ngFor="let option of previews; let index = index"
                                       [feature]="option"
                                       data-test="dashboard-preview-card"></app-feature-preview-card>
         </div>

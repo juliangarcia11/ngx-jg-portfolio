@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { PreviewableRoutes } from '../../../app-routes';
+import { PreviewRoutes } from '../../../app-routes';
 import { Route } from '@angular/router';
 import { RoutePreviewInterface } from '../../../core/models';
 import { DashboardConst } from '../models/dashboard.const';
+import { RoutePreview } from '../../../shared/models/route-preview.model';
 
 @Component({
   selector:    'app-dashboard',
@@ -13,14 +14,9 @@ export class DashboardComponent {
 
   title = DashboardConst.title;
   subtitle = DashboardConst.subtitle;
-
-  redirects: RoutePreviewInterface[];
+  previews: RoutePreviewInterface[];
 
   constructor() {
-    this.redirects = PreviewableRoutes?.map(route => {
-       if (!route.data || !route.data['preview']) return;
-
-       return route.data['preview'];
-    });
+    this.previews = PreviewRoutes?.map(route => new RoutePreview(route)) ?? [];
   }
 }
