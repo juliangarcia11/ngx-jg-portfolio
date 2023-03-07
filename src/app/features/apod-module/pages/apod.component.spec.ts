@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ApodDisplayComponent } from './apod-display.component';
+import { ApodComponent } from './apod.component';
 
-describe('ApodDisplayComponent', () => {
-  let component: ApodDisplayComponent;
-  let fixture: ComponentFixture<ApodDisplayComponent>;
+describe('ApodComponent', () => {
+  let component: ApodComponent;
+  let fixture: ComponentFixture<ApodComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApodDisplayComponent ]
+      declarations: [ ApodComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ApodDisplayComponent);
+    fixture = TestBed.createComponent(ApodComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

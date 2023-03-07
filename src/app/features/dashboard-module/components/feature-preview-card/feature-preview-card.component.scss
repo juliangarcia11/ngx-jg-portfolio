@@ -3,7 +3,7 @@
 .feature-preview-card ::ng-deep .content-card {
     border: solid 1px $some-deeppurple;
     margin: auto;
-    max-width: 20%;
+    max-width: fit-content;
 }
 
 .feature-preview-card ::ng-deep .content-card-header.header-column {

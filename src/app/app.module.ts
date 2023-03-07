@@ -37,7 +37,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {
   AboutMeComponent,
-  ApodDisplayComponent,
+  ApodComponent,
   DashboardModule
 } from './features';
 import { SharedModule } from './shared/shared.module';
@@ -47,18 +47,15 @@ import { WttrModule } from './features/wttr-module/wttr.module';
 @NgModule({
   declarations: [
     AppComponent,
-    ApodDisplayComponent,
     AboutMeComponent
   ],
   exports: [
     AppRoutingModule,
     AppComponent,
-    ApodDisplayComponent,
     AboutMeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
@@ -78,6 +75,8 @@ import { WttrModule } from './features/wttr-module/wttr.module';
     ReactiveFormsModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+
+    AppRoutingModule,
 
     CoreModule,
     SharedModule,
