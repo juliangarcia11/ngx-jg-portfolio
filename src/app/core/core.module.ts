@@ -1,4 +1,5 @@
 import {
+  ErrorHandler,
   NgModule,
   Optional,
   SkipSelf
@@ -16,6 +17,7 @@ import {
   DialogService
 } from './services';
 import { EnsureImportedOnceModule } from './ensure-imported-once.module';
+import { GlobalErrorService } from './services/global-error.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { EnsureImportedOnceModule } from './ensure-imported-once.module';
     HeaderComponent
   ],
   providers: [
+    // processes all errors
+    { provide:  ErrorHandler, useClass: GlobalErrorService },
     DataService,
     DialogService
   ]

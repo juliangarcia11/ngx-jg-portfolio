@@ -33,9 +33,10 @@ describe('FeaturePreviewCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [MatCardModule, MatIconModule, MatButtonModule,
         RouterTestingModule.withRoutes(AppRoutes)],
-      declarations: [ FeaturePreviewCardComponent, ContentCardComponent ]
+      declarations: [ FeaturePreviewCardComponent ]
     })
     .compileComponents();
 
