@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApodConst } from '../models/apod.const';
 
 @Component({
   selector:    'app-apod',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls:   ['./apod.component.scss']
 })
 export class ApodComponent {
+
+  title = ApodConst.title;
+  subtitle = ApodConst.subtitle;
 
 }

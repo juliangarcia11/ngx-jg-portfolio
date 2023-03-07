@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApodRoutingModule } from './apod-routing.module';
 import { ApodComponent } from './pages/apod.component';
+import { SharedModule } from '../../shared/shared.module';
 
 
 
@@ -9,7 +10,8 @@ import { ApodComponent } from './pages/apod.component';
   declarations: [ApodComponent],
   imports: [
     CommonModule,
-    ApodRoutingModule
+    ApodRoutingModule,
+    SharedModule
   ]
 })
 export class ApodModule { }
