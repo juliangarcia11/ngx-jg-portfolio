@@ -9,7 +9,10 @@ import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { WttrService } from '../services/wttr.service';
 import { WttrDisplayModel } from '../models/wttr-display.model';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { FormBuilder } from '@angular/forms';
 import { StateCardStates } from '../../../shared/components';
@@ -17,10 +20,15 @@ import {
   of,
   throwError
 } from 'rxjs';
+import { WttrSearchFormComponent } from '../components/wttr-search-form/wttr-search-form.component';
 
 class MockedWttrService {
   getText$ = (search: string) => search.length > 0 ? of(search) : throwError('no search');
 }
+
+@Component({
+  template: ''
+}) class MockedWttrSearchFormComponent extends WttrSearchFormComponent {}
 
 describe('WttrComponent', () => {
   let component: WttrComponent;
@@ -34,7 +42,7 @@ describe('WttrComponent', () => {
       imports: [
         MatButtonModule
       ],
-      declarations: [ WttrComponent ],
+      declarations: [ WttrComponent, MockedWttrSearchFormComponent ],
       providers: [
         FormBuilder,
         {provide: WttrService, useClass: MockedWttrService},
@@ -50,8 +58,11 @@ describe('WttrComponent', () => {
 
   // before each test, set the model
   beforeEach(() => {
+    component.search = new MockedWttrSearchFormComponent(new FormBuilder());
     component.model = expectedModel;
     component.model.state = StateCardStates.UNTOUCHED;
+    spyOn(component.search, 'reset');
+
     fixture.detectChanges();
   });
 
@@ -95,6 +106,12 @@ describe('WttrComponent', () => {
     fixture.detectChanges();
 
     expect(component.model.state).toBe(StateCardStates.RESPONSE_ERROR);
+  });
+
+  it('should ask the @ViewChild search item to reset if \'resetDisplay()\' when search exists', () => {
+    expect(component.search).toBeTruthy();
+    component.resetDisplay();
+    expect(component.search.reset).toHaveBeenCalled();
   });
 
   /*********************************************************
