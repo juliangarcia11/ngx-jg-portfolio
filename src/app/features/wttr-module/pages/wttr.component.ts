@@ -56,7 +56,6 @@ export class WttrComponent implements OnInit {
         this.model.state = StateCardStates.RESPONSE_ERROR;
       },
       complete: () => {
-        console.info('wttr search complete');
         this.model.state = StateCardStates.DONE;
       }
     });
