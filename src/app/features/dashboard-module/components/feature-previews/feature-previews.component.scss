@@ -1,8 +1,11 @@
 @import "src/styles";
 
+.feature-preview-card:not(:last-of-type) {
+    margin-right: 1em;
+}
+
 .feature-preview-card ::ng-deep .content-card {
     border: solid 1px $some-deeppurple;
-    margin: auto;
     max-width: fit-content;
 }
 

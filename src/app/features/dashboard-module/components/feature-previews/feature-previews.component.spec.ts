@@ -4,7 +4,7 @@ import {
   TestBed,
   tick
 } from '@angular/core/testing';
-import { FeaturePreviewCardComponent } from './feature-preview-card.component';
+import { FeaturePreviewsComponent } from './feature-previews.component';
 import { MatCardModule } from '@angular/material/card';
 import { MockedFeaturePreviewConst } from '../../models/mocked-feature-preview.const';
 import { HarnessLoader } from '@angular/cdk/testing';
@@ -23,9 +23,9 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AppRoutes } from '../../../../app-routes';
 
-describe('FeaturePreviewCardComponent', () => {
-  let component: FeaturePreviewCardComponent;
-  let fixture: ComponentFixture<FeaturePreviewCardComponent>;
+describe('FeaturePreviewsComponent', () => {
+  let component: FeaturePreviewsComponent;
+  let fixture: ComponentFixture<FeaturePreviewsComponent>;
   let loader: HarnessLoader;
   let mockFeature = MockedFeaturePreviewConst;
   let router: Router;
@@ -36,20 +36,20 @@ describe('FeaturePreviewCardComponent', () => {
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [MatCardModule, MatIconModule, MatButtonModule,
         RouterTestingModule.withRoutes(AppRoutes)],
-      declarations: [ FeaturePreviewCardComponent ]
+      declarations: [ FeaturePreviewsComponent ]
     })
     .compileComponents();
 
     router = TestBed.get(Router);
     location = TestBed.get(Location);
-    fixture = TestBed.createComponent(FeaturePreviewCardComponent);
+    fixture = TestBed.createComponent(FeaturePreviewsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     loader = TestbedHarnessEnvironment.loader(fixture);
   });
 
   beforeEach(() => {
-    component.feature = new RoutePreview(mockFeature);
+    component.features = [new RoutePreview(mockFeature)];
     fixture.detectChanges();
   });
 
@@ -58,15 +58,15 @@ describe('FeaturePreviewCardComponent', () => {
   });
 
   it('should have a feature', async () => {
-    expect(component.feature.title.length).toBeGreaterThan(0);
+    expect(component.features[0].title.length).toBeGreaterThan(0);
   });
 
   it('should have a feature title', async () => {
-    expect(component.feature.title.length).toBeGreaterThan(0);
+    expect(component.features[0].title.length).toBeGreaterThan(0);
   });
 
   it('should have a feature subtitle', async () => {
-    expect(component.feature.subtitle.length).toBeGreaterThan(0);
+    expect(component.features[0].subtitle.length).toBeGreaterThan(0);
   });
 
   it('should show a preview card', () => {

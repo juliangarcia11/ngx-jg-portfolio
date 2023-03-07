@@ -1,4 +1,4 @@
-<app-content-card *ngIf="feature"
+<app-content-card *ngFor="let feature of features; let index = index;"
                   class="feature-preview-card"
                   [headerAsRow]="false"
                   data-test="feature-preview-card">

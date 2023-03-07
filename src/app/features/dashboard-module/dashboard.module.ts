@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './pages/dashboard.component';
 import { MatCardModule } from '@angular/material/card';
-import { FeaturePreviewCardComponent } from './components/feature-preview-card/feature-preview-card.component';
+import { FeaturePreviewsComponent } from './components/feature-previews/feature-previews.component';
 import { SharedModule } from '../../shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 @NgModule({
   declarations: [
     DashboardComponent,
-    FeaturePreviewCardComponent
+    FeaturePreviewsComponent
   ],
   imports: [
     CommonModule,
