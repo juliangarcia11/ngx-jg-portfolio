@@ -5,11 +5,12 @@ import { ApodComponent } from './pages/apod.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ApodCalendarComponent } from './components/apod-calendar/apod-calendar.component';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { ApodTileComponent } from './components/apod-tile/apod-tile.component';
 
 
 
 @NgModule({
-  declarations: [ApodComponent, ApodCalendarComponent],
+  declarations: [ApodComponent, ApodCalendarComponent, ApodTileComponent],
   imports: [
     CommonModule,
     ApodRoutingModule,

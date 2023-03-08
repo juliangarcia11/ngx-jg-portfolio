@@ -6,6 +6,7 @@ import {
   query_for_all_el,
   query_for_el
 } from '../../../../core/utils';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe('ApodCalendarComponent', () => {
   let component: ApodCalendarComponent;
@@ -13,6 +14,7 @@ describe('ApodCalendarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
       imports: [MatGridListModule],
       declarations: [ ApodCalendarComponent ]
     })

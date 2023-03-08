@@ -18,6 +18,9 @@
                    class="apod-tile"
                    [class.hidden-tile]="i < monthStartDayOfWeek"
                    data-test="apod-tile">
-       {{ i < monthStartDayOfWeek ? 'hidden' : 'real day of month'}}
+       <app-apod-tile *ngIf="!(i < monthStartDayOfWeek)"
+                      [day]="i - monthStartDayOfWeek + 1"
+                      [month]="currentMonth + 1"
+                      [year]="currentDate.getFullYear()"></app-apod-tile>
     </mat-grid-tile>
 </mat-grid-list>
