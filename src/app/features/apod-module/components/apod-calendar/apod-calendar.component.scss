@@ -1,0 +1,15 @@
+@import "src/styles";
+
+:host .day-of-week-grid {
+    margin-bottom: 0.5em;
+    background-color: $some-deeppurple;
+    color: white;
+}
+
+:host .calendar-grid mat-grid-tile {
+    border: solid 1px $some-deeppurple;
+}
+
+:host .hidden-tile {
+    visibility: hidden;
+}

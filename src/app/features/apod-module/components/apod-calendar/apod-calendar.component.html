@@ -1,1 +1,23 @@
-<p>apod-calendar works!</p>
+<mat-grid-list cols="7"
+               rowHeight="7:2"
+               gutterSize="0.5em"
+               class="day-of-week-grid mat-h3"
+               data-test="day-of-week-grid">
+    <mat-grid-tile *ngFor="let day of daysOfWeek; let i = index;"
+                   class="apod-day-of-week-tile"
+                   data-test="apod-day-of-week-tile">
+        {{ day }}
+    </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="7"
+               rowHeight="2:1"
+               gutterSize="0.5em"
+               class="calendar-grid"
+               data-test="calendar-grid">
+    <mat-grid-tile *ngFor="let tile of tiles; let i = index;"
+                   class="apod-tile"
+                   [class.hidden-tile]="i < monthStartDayOfWeek"
+                   data-test="apod-tile">
+       {{ i < monthStartDayOfWeek ? 'hidden' : 'real day of month'}}
+    </mat-grid-tile>
+</mat-grid-list>

@@ -4,6 +4,7 @@ import { ApodRoutingModule } from './apod-routing.module';
 import { ApodComponent } from './pages/apod.component';
 import { SharedModule } from '../../shared/shared.module';
 import { ApodCalendarComponent } from './components/apod-calendar/apod-calendar.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 
@@ -12,7 +13,8 @@ import { ApodCalendarComponent } from './components/apod-calendar/apod-calendar.
   imports: [
     CommonModule,
     ApodRoutingModule,
-    SharedModule
+    SharedModule,
+    MatGridListModule
   ]
 })
 export class ApodModule { }

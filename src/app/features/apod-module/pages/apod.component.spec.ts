@@ -30,5 +30,5 @@ describe('ApodComponent', () => {
 
   it('should have an apod calendar item', () => {
     expect(query_for_el(fixture, '[data-test="apod-calendar"]')).toBeTruthy();
-  })
+  });
 });
