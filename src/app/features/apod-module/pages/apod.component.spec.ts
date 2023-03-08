@@ -26,5 +26,9 @@ describe('ApodComponent', () => {
 
   it('should have an app content card', () => {
     expect(query_for_el(fixture, '[data-test="apod-content-card"]')).toBeTruthy();
+  });
+
+  it('should have an apod calendar item', () => {
+    expect(query_for_el(fixture, '[data-test="apod-calendar"]')).toBeTruthy();
   })
 });
