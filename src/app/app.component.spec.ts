@@ -120,4 +120,24 @@ describe('AppComponent', () => {
   it('should have a currentNavigationRoute', () => {
     expect(component.currentNavigationRoute).toBeTruthy();
   });
+
+  it('should be in dark mode by default (bless)', () => {
+    expect(component.darkMode).toBe(true);
+  });
+
+  it('should have the \'dark-mode\' class on the element when in dark mode', () => {
+    expect(component.darkMode).toBe(true);
+    expect(fixture.nativeElement.classList.contains('dark-mode')).toBe(true);
+  });
+
+  it('should NOT have the \'dark-mode\' class on the element when NOT in dark mode', () => {
+    expect(fixture.nativeElement.classList.contains('dark-mode'))
+      .withContext('checking dark mode at start').toBe(true);
+
+    component.darkMode = false;
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.classList.contains('dark-mode'))
+      .withContext('checking dark mode at end').toBe(false);
+  });
 });

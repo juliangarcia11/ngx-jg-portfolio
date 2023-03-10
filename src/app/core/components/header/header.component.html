@@ -22,6 +22,12 @@
   <!----------------------------Right---------------------------->
   <div class="column">
     <button mat-icon-button
+            (click)="handleDarkModeClick()"
+            aria-label="moon button to toggle dark mode"
+            data-test="dark-mode">
+        <mat-icon>{{ isDarkMode ? 'dark_mode' : 'brightness_5'}}</mat-icon>
+    </button>
+    <button mat-icon-button
             (click)="handleShareClick()"
             aria-label="share button to share the current url"
             data-test="share">

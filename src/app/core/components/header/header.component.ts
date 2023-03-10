@@ -19,6 +19,12 @@ import {HeaderInterface} from "./header.interface";
 export class HeaderComponent {
 
   @Input()
+  isDarkMode = true;
+
+  @Output()
+  isDarkModeChange = new EventEmitter<boolean>();
+
+  @Input()
   model: HeaderInterface = { title: '', icon: '', currentUrl: '' };
 
   @Output()
@@ -34,6 +40,14 @@ export class HeaderComponent {
    */
   handleMenuClick(): void {
     this.onClickMenu.emit();
+  }
+
+  /**
+   * When the dark mode button is clicked, emit the event to parent components
+   */
+  handleDarkModeClick(): void {
+    this.isDarkMode = !this.isDarkMode;
+    this.isDarkModeChange.emit(this.isDarkMode);
   }
 
   /**

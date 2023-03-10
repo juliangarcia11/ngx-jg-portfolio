@@ -1,4 +1,7 @@
-import {Component} from '@angular/core';
+import {
+  Component,
+  HostBinding
+} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router, Routes} from "@angular/router";
 import {
   AppRoutes,
@@ -14,6 +17,13 @@ import {HeaderInterface} from './core/components';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  /**
+   * @HostBinding .dark-mode added to <app-component> when darkMode == true
+   */
+  @HostBinding('class.dark-mode')
+  darkMode = true;
+
   appTitle = 'Ngx JG Portfolio';
   sideNavOpened: boolean = false;
   navigationRoutes: Routes;

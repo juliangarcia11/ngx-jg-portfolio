@@ -103,6 +103,10 @@ describe('HeaderComponent', () => {
     expect(component.model).toBe(expectedHeader);
   });
 
+  it('should have a dark mode setting', () => {
+    expect(component.isDarkMode).toBeDefined();
+  });
+
   it('should show a toolbar', () => {
     expect(query_for_el(fixture, '[data-test="toolbar"]')).toBeTruthy();
   });
@@ -120,6 +124,11 @@ describe('HeaderComponent', () => {
   it('should show a menu button', () => {
     expect(query_for_el(fixture, '[data-test="menu"]')).toBeTruthy();
   });
+
+  it('should show a dark mode button', () => {
+    expect(query_for_el(fixture, '[data-test="dark-mode"]')).toBeTruthy();
+  });
+
 
   it('should show a share button', () => {
     expect(query_for_el(fixture, '[data-test="share"]')).toBeTruthy();
@@ -154,5 +163,16 @@ describe('HeaderComponent', () => {
 
     // assert that the clipboard service was called
     expect(snackBarSpy.open).toHaveBeenCalled();
+  });
+
+  it('should emit isDarkModeChange on \'dark mode\' button click', () => {
+    // set up a spy to listen for openSideNav emissions
+    spyOn(component.isDarkModeChange, 'emit');
+
+    // click the menu button
+    click_item(fixture, '[data-test="dark-mode"]');
+
+    // assert the event emission occurred
+    expect(component.isDarkModeChange.emit).toHaveBeenCalled();
   });
 });
